@@ -22,6 +22,10 @@ class GameContainer extends Component {
     this.handleMove = this.handleMove.bind(this);
   }
 
+  handleMove(){
+    
+  }
+
   render(){
     return (
       <React.Fragment>
