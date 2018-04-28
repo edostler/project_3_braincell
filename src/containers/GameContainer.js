@@ -32,7 +32,13 @@ class GameContainer extends Component {
         {id: 25,  name: "Art",                state: 1}
       ],      // Hard coded until we have API data
       questions: [[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]]],
-      currentQuestion: [],
+      currentQuestion: [
+        "What is the colour of the sky?",
+        "Blue",
+        "Red",
+        "Green",
+        "Yellow"
+      ],      // Hard coded until we have API data
       currentCell: 0,
       currentPoints: 0,
       currentDifficulty: 1

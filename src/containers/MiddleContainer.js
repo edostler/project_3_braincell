@@ -7,7 +7,8 @@ import End from '../components/End';
 
 const MiddleContainer = (props) => {
 
-    if(!props.allCategories || !props.playerCategories){
+    // If any of the props are not yet populated (async stuff) then return null;
+    if(!props.playerCategories){
       return null;
     }
 
