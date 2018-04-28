@@ -14,13 +14,20 @@ const MiddleContainer = (props) => {
     return (
       <React.Fragment>
         <p>I'm a Middle Container</p>
-        <Start/>
+        <Start
+          playerName={props.playerName}
+        />
         <CategoryContainer
-          allCategories={props.allCategories}
+          playerName={props.playerName}
           playerCategories={props.playerCategories}
         />
-        <QuizContainer/>
-        <End/>
+        <QuizContainer
+          playerName={props.playerName}
+          currentQuestion={props.currentQuestion}
+        />
+        <End
+          playerName={props.playerName}
+        />
       </React.Fragment>
     )
 

@@ -50,8 +50,10 @@ class GameContainer extends Component {
         <p>I'm a Game Container</p>
         <CellContainer/>
         <MiddleContainer
-          allCategories={this.state.allCategories}
+          gameStatus={this.state.gameStatus}
+          playerName={this.state.playerName}
           playerCategories={this.state.playerCategories}
+          currentQuestion={this.state.currentQuestion}
         />
       </React.Fragment>
     )
