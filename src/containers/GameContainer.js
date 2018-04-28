@@ -19,7 +19,6 @@ class GameContainer extends Component {
       currentPoints: 0,
       currentDifficulty: 1
     }
-    this.handleMove = this.handleMove.bind(this);
   }
 
   render(){
