@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Start.css';
 
-class Start extends Component {
+const Start = (props) => {
 
-  render(){
-    return (
-      <p>I'm a Start</p>
-    )
-  }
+  return (
+    <p>I'm a Start</p>
+  )
 
 }
 

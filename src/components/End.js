@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './End.css';
 
-class End extends Component {
+const End = (props) => {
 
-  render(){
-    return (
-      <p>I'm an End</p>
-    )
-  }
+  return (
+    <p>I'm an End</p>
+  )
 
 }
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import './MiddleContainer.css';
 import Start from '../components/Start';
+import Category from '../components/Category';
 import QuizContainer from './QuizContainer';
-import CategoryContainer from './CategoryContainer';
 import End from '../components/End';
 
 const MiddleContainer = (props) => {
@@ -19,9 +19,10 @@ const MiddleContainer = (props) => {
           playerName={props.playerName}
           gameStatus={props.gameStatus}
         />
-        <CategoryContainer
+        <Category
           playerName={props.playerName}
           playerCategories={props.playerCategories}
+          gameStatus={props.gameStatus}
         />
         <QuizContainer
           playerName={props.playerName}
