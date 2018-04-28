@@ -10,6 +10,17 @@ const Category = (props) => {
 
   const handleChange = (event) => {
     console.log("Player has selected: ", props.playerCategories[event.target.value]);
+    // Add following callback to GameContainer - remember to bind(this) in state props:
+          // handleCategorySelected(index){
+          //   const selectedCategory = this.state.playerCategories[index];
+          //   this.setState({currentCategory: selectedCategory});
+          // }
+    // This will be triggered by the following code in the body of this function:
+          // let index = event.target.value;
+          // props.onCategorySelected(index);
+    // Where onCategorySelected is a property that is passed down to Category like so:
+          // <Category onCategorySelected={this.handleCategorySelected}  ...etc
+    // IN SUMMARY, THIS WILL:
     // (1) Change currentCategory prop on GameContainer
     // (2) Change gameStatus prop on GameContainer
     // (3) Then GameContainer will use both the above props to:
