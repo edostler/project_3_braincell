@@ -60,6 +60,7 @@ class GameContainer extends Component {
           playerName={this.state.playerName}
           playerCategories={this.state.playerCategories}
           currentQuestion={this.state.currentQuestion}
+          currentPoints={this.state.currentPoints}
         />
       </React.Fragment>
     )

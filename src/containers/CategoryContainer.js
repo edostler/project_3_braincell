@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './CategoryContainer.css';
 import Category from '../components/Category';
 
 
-class CategoryContainer extends Component {
+const CategoryContainer = (props) => {
 
-  render(){
-    return (
+  return (
+    <React.Fragment>
+      <p>I'm a CategoryContainer</p>
       <Category />
-    )
-  }
+    </React.Fragment>
+  )
 
 }
 

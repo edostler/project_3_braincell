@@ -17,6 +17,7 @@ const MiddleContainer = (props) => {
         <p>I'm a Middle Container</p>
         <Start
           playerName={props.playerName}
+          gameStatus={props.gameStatus}
         />
         <CategoryContainer
           playerName={props.playerName}
@@ -28,6 +29,7 @@ const MiddleContainer = (props) => {
         />
         <End
           playerName={props.playerName}
+          currentPoints={props.currentPoints}
         />
       </React.Fragment>
     )
