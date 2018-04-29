@@ -13,7 +13,28 @@ class GameContainer extends Component {
 
       playerName: null,
 
+      categoryIndices: [
+        {index: 0,  name: "General Knowledge"},
+        {index: 1,  name: "Mythology"},
+        {index: 2,  name: "Sports"},
+        {index: 3,  name: "Geography"},
+        {index: 4,  name: "History"},
+        {index: 5,  name: "Animals"},
+        {index: 6,  name: "Politics"},
+        {index: 7,  name: "Art"}
+      ],
+
       allCategories: [
+        {id: 9,   name: "General Knowledge",  state: 1},
+        {id: 20,  name: "Mythology",          state: 1},
+        {id: 21,  name: "Sports",             state: 1},
+        {id: 22,  name: "Geography",          state: 1},
+        {id: 23,  name: "History",            state: 1},
+        {id: 27,  name: "Animals",            state: 1},
+        {id: 24,  name: "Politics",           state: 1},
+        {id: 25,  name: "Art",                state: 1}
+      ],         // Hard coded until we have API data
+      allCategories2: [
         {id: 9,   name: "General Knowledge",  state: 1},
         {id: 20,  name: "Mythology",          state: 1},
         {id: 21,  name: "Sports",             state: 1},
@@ -368,24 +389,24 @@ class GameContainer extends Component {
       currentCategory: selectedCategory,
       gameStatus: 2
     });
-    this.sampleQuestion();
+    this.sampleQuestion(selectedCategory);
   }
 
-  sampleQuestion() {
-    let index = 0;
+  sampleQuestion(selectedCategory) {
+    // loop through questions to find index of selected category (by checking first question.category in each easy category)
     let categoryIndex = null;
-    this.state.questions.forEach(function(categoryGroup) {
-      if (categoryGroup[0][0].category === this.state.currentCategory.name) {
-        categoryIndex = index;
+    this.state.categoryIndices.forEach(function(categoryGroup) {
+      if (categoryGroup.name === selectedCategory.name) {
+        categoryIndex = categoryGroup.index;
       }
-      index += 1;
-    }.bind(this));
-    // loop through questions to find index of selected category (by checking first question.category in each)
-    // find length of sub-array (based on difficulty as index)
-    // generate random number based on length
+    });
+    // find length of sub-array (based on difficulty as index) and generate random number based on length
+    let randomNumber = Math.floor(Math.random() * this.state.questions[categoryIndex][this.state.currentDifficulty - 1].length);
     // set current question to be sampled question
-    console.log(categoryIndex);
-    // NOT COMPLETE - WORK IN PROGRESS
+    let sampledQuestion = this.state.questions[categoryIndex][this.state.currentDifficulty - 1][randomNumber];
+    this.setState({currentQuestion: sampledQuestion});
+    // remove question from questions array
+    this.state.questions[categoryIndex][this.state.currentDifficulty - 1].splice(randomNumber, 1);
   }
 
   handleResult(result) {
@@ -418,10 +439,18 @@ class GameContainer extends Component {
   }
 
   checkIncrementDiffculty() {
-    if((this.state.currentCell + 1) === 5 || (this.state.currentCell + 1) === 10 || (this.state.currentCell + 1) === 15) {
+    // if((this.state.currentCell + 1) === 5 || (this.state.currentCell + 1) === 10 || (this.state.currentCell + 1) === 15) {
+    // NEED TO RETURN TO THIS TO BUILD IN LEVEL 4 DIFFICULTY, RE. RANDOM CATEGORY IF STATEMENT IN SAMPLE QUESTION FUNCTION
+    if((this.state.currentCell + 1) === 5) {
       this.setState({
         currentDifficulty: this.state.currentDifficulty + 1,
-        playerCategories: this.state.allCategories
+        playerCategories: this.state.allCategories,
+      });
+    }
+    else if ((this.state.currentCell + 1) === 10) {
+      this.setState({
+        currentDifficulty: this.state.currentDifficulty + 1,
+        playerCategories: this.state.allCategories2,
       });
     }
   }
