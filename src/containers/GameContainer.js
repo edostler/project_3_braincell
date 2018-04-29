@@ -44,10 +44,30 @@ class GameContainer extends Component {
       currentDifficulty: 1
     }
     this.handleMove = this.handleMove.bind(this);
+    this.handlePlayerNameKeyUp = this.handlePlayerNameKeyUp.bind(this);
+    this.handlePlayerNameSubmit = this.handlePlayerNameSubmit.bind(this);
   }
 
   handleMove(){
 
+  }
+
+  // This callback is activated from Start.js,
+  // when the player enters their name:
+  handlePlayerNameKeyUp(event) {
+    this.setState({
+      playerName: event.target.value
+    });
+  }
+
+  // This callback is activated from Start.js,
+  // when the player hits submit ('Go' button)
+  // after entering their name:
+  handlePlayerNameSubmit(event) {
+    event.preventDefault();
+    this.setState({
+      gameStatus: 1
+    });
   }
 
   render(){
@@ -61,6 +81,8 @@ class GameContainer extends Component {
           playerCategories={this.state.playerCategories}
           currentQuestion={this.state.currentQuestion}
           currentPoints={this.state.currentPoints}
+          handlePlayerNameKeyUp={this.handlePlayerNameKeyUp}
+          handlePlayerNameSubmit={this.handlePlayerNameSubmit}
         />
       </React.Fragment>
     )

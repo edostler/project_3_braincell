@@ -18,6 +18,8 @@ const MiddleContainer = (props) => {
         <Start
           playerName={props.playerName}
           gameStatus={props.gameStatus}
+          handlePlayerNameKeyUp={props.handlePlayerNameKeyUp}
+          handlePlayerNameSubmit={props.handlePlayerNameSubmit}
         />
         <Category
           playerName={props.playerName}
