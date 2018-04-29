@@ -1,4 +1,13 @@
 .game-container {
+  margin: 0 auto;
+
   border-style: solid;
   background-color: lightblue;
+
+  position: fixed;
+  top: 80px;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  overflow: auto;
 }
