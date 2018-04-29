@@ -115,7 +115,9 @@ class GameContainer extends Component {
           <p>Game Status: {this.state.gameStatus}</p>
           <p>Player Name: {this.state.playerName}</p>
           <p>Selected Category: {this.state.currentCategory.name}</p>
-          <CellContainer/>
+          <CellContainer
+            currentCell={this.state.currentCell}
+          />
           <MiddleContainer
             gameStatus={this.state.gameStatus}
             playerName={this.state.playerName}
