@@ -23,6 +23,7 @@
     font-weight: normal;
     flex: 1 0 auto;
     position: relative;
+    box-shadow: 5px 5px 5px grey;
 }
 
 .box:after {
