@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Cell.css';
 
-class Cell extends Component {
+const Cell = (props) => {
 
-  render(){
-    return (
-      <p>I'm a Cell</p>
-    )
-  }
+  return (
+    <React.Fragment>
+      Cell {props.position}
+    </React.Fragment>
+  )
 
 }
 
