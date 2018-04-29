@@ -8,41 +8,19 @@ const Category = (props) => {
     return <option value={index} key={index}>{category.name}</option>
   });
 
-  const handleChange = (event) => {
-    console.log("Player has selected: ", props.playerCategories[event.target.value]);
-    // Add following callback to GameContainer - remember to bind(this) in state props:
-          // handleCategorySelected(index){
-          //   const selectedCategory = this.state.playerCategories[index];
-          //   this.setState({currentCategory: selectedCategory});
-          // }
-    // This will be triggered by the following code in the body of this function:
-          // let index = event.target.value;
-          // props.onCategorySelected(index);
-    // Where onCategorySelected is a property that is passed down to Category like so:
-          // <Category onCategorySelected={this.handleCategorySelected}  ...etc
-    // IN SUMMARY, THIS WILL:
-    // (1) Change currentCategory prop on GameContainer
-    // (2) Change gameStatus prop on GameContainer
-    // (3) Then GameContainer will use both the above props to:
-    // (a) Randomly select a quiz question for the chosen currentCategory and
-    // (b) Change the displayed component to be QuizContainer - which is displayed when gameStatus = 2
-  }
-
   return (
     <React.Fragment>
       <p>I'm a Category</p>
-      <p>Player: {props.playerName}</p>
       <p>Number of categories to choose from: {props.playerCategories.length}</p>
 
       <select
-        onChange={handleChange}
+        onChange={props.handleCategorySelect}
         id="category-selector"
         defaultValue="default">
         <option disabled value="default">Choose a category...</option>
         {options}
       </select>
 
-      <p>Game Status: {props.gameStatus}</p>
 
     </React.Fragment>
   )

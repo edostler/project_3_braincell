@@ -11,6 +11,7 @@ class GameContainer extends Component {
       gameStatus: 0,
       // gameStatus: 0 = Start, 1 = Choose Category, 2 = In Play, 3 = End
       playerName: null,
+
       allCategories: [
         {id: 9,   name: "General Knowledge",  state: 1},
         {id: 20,  name: "Mythology",          state: 1},
@@ -32,6 +33,8 @@ class GameContainer extends Component {
         {id: 25,  name: "Art",                state: 1}
       ],      // Hard coded until we have API data
       questions: [[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]]],
+
+      currentCategory: {id: 0,   name: "To be selected...",  state: 1}, // default - might want to change this later
       currentQuestion: [
         "What is the colour of the sky?",
         "Blue",
@@ -46,6 +49,7 @@ class GameContainer extends Component {
     this.handleMove = this.handleMove.bind(this);
     this.handlePlayerNameKeyUp = this.handlePlayerNameKeyUp.bind(this);
     this.handlePlayerNameSubmit = this.handlePlayerNameSubmit.bind(this);
+    this.handleCategorySelect = this.handleCategorySelect.bind(this);
   }
 
   handleMove(){
@@ -54,6 +58,7 @@ class GameContainer extends Component {
 
   // This callback is activated from Start.js,
   // when the player enters their name:
+  // (1) Update the playerName to be the one that has been entered
   handlePlayerNameKeyUp(event) {
     this.setState({
       playerName: event.target.value
@@ -63,6 +68,7 @@ class GameContainer extends Component {
   // This callback is activated from Start.js,
   // when the player hits submit ('Go' button)
   // after entering their name:
+  // (1) Set the gameStatus to 1, so that the Category component is now rendered
   handlePlayerNameSubmit(event) {
     event.preventDefault();
     this.setState({
@@ -70,10 +76,27 @@ class GameContainer extends Component {
     });
   }
 
+  // This callback is activated from Category.js,
+  // when the player chooses a category from the select dropdown list:
+  // (1) Update the currentCategory to be the one that has been selected
+  // (2) Remove that category from the player's list of available categories - TBD
+  // (3) Set the gameStatus to 2, so that the QuizContainer is now rendered
+  handleCategorySelect(event){
+    const index = event.target.value;
+    const selectedCategory = this.state.playerCategories[index];
+    this.setState({
+      currentCategory: selectedCategory,
+      gameStatus: 2
+    });
+  }
+
   render(){
     return (
       <React.Fragment>
         <p>I'm a Game Container</p>
+        <p>Game Status: {this.state.gameStatus}</p>
+        <p>Player Name: {this.state.playerName}</p>
+        <p>Selected Category: {this.state.currentCategory.name}</p>
         <CellContainer/>
         <MiddleContainer
           gameStatus={this.state.gameStatus}
@@ -83,6 +106,7 @@ class GameContainer extends Component {
           currentPoints={this.state.currentPoints}
           handlePlayerNameKeyUp={this.handlePlayerNameKeyUp}
           handlePlayerNameSubmit={this.handlePlayerNameSubmit}
+          handleCategorySelect={this.handleCategorySelect}
         />
       </React.Fragment>
     )
