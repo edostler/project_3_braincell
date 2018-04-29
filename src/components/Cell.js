@@ -3,7 +3,7 @@ import './Cell.css';
 
 const Cell = (props) => {
 
-  if(parseInt(props.position) === props.currentCell) {
+  if(parseInt(props.position, 10) === props.currentCell) {
     return (
       <article id={props.difficulty} className="box">
         <div className="inner">X</div>
