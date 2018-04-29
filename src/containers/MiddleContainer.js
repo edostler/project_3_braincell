@@ -17,12 +17,13 @@ const MiddleContainer = (props) => {
         <p>I'm a Middle Container</p>
         <Start
           playerName={props.playerName}
-          gameStatus={props.gameStatus}
+          handlePlayerNameKeyUp={props.handlePlayerNameKeyUp}
+          handlePlayerNameSubmit={props.handlePlayerNameSubmit}
         />
         <Category
           playerName={props.playerName}
           playerCategories={props.playerCategories}
-          gameStatus={props.gameStatus}
+          handleCategorySelect={props.handleCategorySelect}
         />
         <QuizContainer
           playerName={props.playerName}

@@ -5,7 +5,9 @@ class Footer extends Component {
 
   render(){
     return (
-        <p>Copyright © 2018 BrainCell Inc. All rights reserved.</p>
+        <p className="copyright">
+          Copyright © 2018 BrainCell Inc. All rights reserved.
+        </p>
     )
   }
 

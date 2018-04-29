@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Cell.css';
 
-class Cell extends Component {
+const Cell = (props) => {
 
-  render(){
-    return (
-      <p>I'm a Cell</p>
-    )
-  }
+  return (
+    <article id={props.difficulty} className="box">
+      <div className="inner">Cell {props.position}</div>
+    </article>
+  )
 
 }
 

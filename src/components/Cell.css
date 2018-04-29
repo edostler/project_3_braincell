@@ -1,0 +1,45 @@
+
+/* http://bluecaret.com/blog/responsive-grid-of-squares */
+
+#easy {
+  background: limegreen;
+}
+
+#medium {
+  background: dodgerblue;
+}
+
+#hard {
+  background: red;
+}
+
+#mix {
+  background: yellow;
+}
+
+.box {
+    margin: 5px;
+    color: black;
+    font-weight: normal;
+    flex: 1 0 auto;
+    position: relative;
+    box-shadow: 5px 5px 5px grey;
+}
+
+.box:after {
+    content: "";
+    float:left;
+    display: block;
+    padding-top: 100%;
+}
+
+.box .inner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
