@@ -50,6 +50,7 @@ class GameContainer extends Component {
     this.handlePlayerNameKeyUp = this.handlePlayerNameKeyUp.bind(this);
     this.handlePlayerNameSubmit = this.handlePlayerNameSubmit.bind(this);
     this.handleCategorySelect = this.handleCategorySelect.bind(this);
+    this.handleResult = this.handleResult.bind(this);
   }
 
   handleMove(){
@@ -90,6 +91,22 @@ class GameContainer extends Component {
     });
   }
 
+  handleResult(result) {
+    if(result) {
+      console.log("Correct!");
+      this.setState({
+        currentCell: this.state.currentCell + 1,
+        gameStatus: 1
+      })
+    }
+    else {
+      console.log("Incorrect!");
+      this.setState({
+        gameStatus: 1
+      })
+    }
+  }
+
   render(){
     return (
       <React.Fragment>
@@ -108,6 +125,7 @@ class GameContainer extends Component {
             handlePlayerNameKeyUp={this.handlePlayerNameKeyUp}
             handlePlayerNameSubmit={this.handlePlayerNameSubmit}
             handleCategorySelect={this.handleCategorySelect}
+            handleResult={this.handleResult}
           />
         </div>
       </React.Fragment>

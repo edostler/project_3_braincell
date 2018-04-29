@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Answer.css';
 
 const Answer = (props) => {
@@ -7,7 +7,7 @@ const Answer = (props) => {
     <React.Fragment>
       <div className="answer">
         <p>I'm an Answer</p>
-        <p>{props.answer}</p>
+        <p id={props.answerIndex} onClick={() => {props.handleAnswer(props.answer)}}>{props.answer}</p>
       </div>
     </React.Fragment>
   )
