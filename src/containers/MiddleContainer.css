@@ -1,4 +1,10 @@
 .middle-container {
+  margin: 0 auto;
+  width: 60vw;
+  max-width: 60vh;
+  height: 60vw;
+  max-height: 60vh;
+  font-size: 0.8rem;
   border-style: solid;
   background-color: lightgreen;
 }

@@ -2,6 +2,8 @@
   display: inline-block;
   border-style: solid;
   background-color: lavender;
-  height: 80px;
-  width: 150px;
+  width: 12vw;
+  max-width: 12vh;
+  height: 15vw;
+  max-height: 15vh;
 }
