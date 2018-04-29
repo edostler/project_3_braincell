@@ -51,6 +51,8 @@ class GameContainer extends Component {
     this.handlePlayerNameSubmit = this.handlePlayerNameSubmit.bind(this);
     this.handleCategorySelect = this.handleCategorySelect.bind(this);
     this.handleResult = this.handleResult.bind(this);
+    this.checkIncrementDiffculty = this.checkIncrementDiffculty.bind(this);
+    this.removeCategory = this.removeCategory.bind(this);
   }
 
   handleMove(){
@@ -98,17 +100,33 @@ class GameContainer extends Component {
         currentCell: this.state.currentCell + 1,
         gameStatus: 1
       });
-      if((this.state.currentCell + 1) === 5 || (this.state.currentCell + 1) === 10 || (this.state.currentCell + 1) === 15) {
-        this.setState({
-          currentDifficulty: this.state.currentDifficulty + 1,
-        });
-      }
+      this.removeCategory();
+      this.checkIncrementDiffculty();
     }
     else {
       console.log("Incorrect!");
       this.setState({
         gameStatus: 1
       })
+    }
+  }
+
+  removeCategory(){
+    let index = 0;
+    this.state.playerCategories.forEach(function(category) {
+      if (category === this.state.currentCategory) {
+        this.state.playerCategories.splice(index, 1);
+      }
+      index += 1;
+    }.bind(this));
+  }
+
+  checkIncrementDiffculty() {
+    if((this.state.currentCell + 1) === 5 || (this.state.currentCell + 1) === 10 || (this.state.currentCell + 1) === 15) {
+      this.setState({
+        currentDifficulty: this.state.currentDifficulty + 1,
+        playerCategories: this.state.allCategories
+      });
     }
   }
 
