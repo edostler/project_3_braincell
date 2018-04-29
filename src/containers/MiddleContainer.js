@@ -48,6 +48,7 @@ const MiddleContainer = (props) => {
             <QuizContainer
               playerName={props.playerName}
               currentQuestion={props.currentQuestion}
+              handleResult={props.handleResult}
             />
           </div>
         </React.Fragment>

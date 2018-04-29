@@ -5,3 +5,19 @@
   height: 80px;
   width: 150px;
 }
+
+#one {
+  background: limegreen;
+}
+
+#two {
+  background: dodgerblue;
+}
+
+#three {
+  background: red;
+}
+
+#four {
+  background: yellow;
+}
