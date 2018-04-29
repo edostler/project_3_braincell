@@ -3,13 +3,15 @@
 
 .grid {
     margin: 0 auto;
-    width: 100vw;
-    max-width: 100vh;
-    height: 80vw;
-    max-height: 80vh;
+
+    width: 70vw;
+    max-width: 82vh;
+    height: 70vw;
+    max-height: 82vh;
+
     font-size: 1rem;
     border-style: solid;
-    background-color: lightyellow;
+    background-color: white;
 
     position: fixed;
     top: 80px;

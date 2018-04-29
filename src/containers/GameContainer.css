@@ -2,7 +2,9 @@
   margin: 0 auto;
 
   border-style: solid;
-  background-color: lightblue;
+  background-color: lightgrey;
+  color: black;
+  font-size: 10px;
 
   position: fixed;
   top: 80px;
