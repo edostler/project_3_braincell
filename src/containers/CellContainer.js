@@ -8,32 +8,32 @@ class CellContainer extends Component {
     return (
       <article className="grid">
         <div className="row">
-          <div id="easy" className="box"><Cell className="inner" position="01"/></div>
-          <div id="easy" className="box"><Cell className="inner" position="02"/></div>
-          <div id="easy" className="box"><Cell className="inner" position="03"/></div>
-          <div id="easy" className="box"><Cell className="inner" position="04"/></div>
-          <div id="easy" className="box"><Cell className="inner" position="05"/></div>
+          <Cell difficulty="easy" position="1"/>
+          <Cell difficulty="easy" position="2"/>
+          <Cell difficulty="easy" position="3"/>
+          <Cell difficulty="easy" position="4"/>
+          <Cell difficulty="easy" position="5"/>
         </div>
         <div className="row">
-          <div id="medium" className="box"><Cell className="inner" position="06"/></div>
-          <div id="medium" className="box"><Cell className="inner" position="07"/></div>
-          <div id="medium" className="box"><Cell className="inner" position="08"/></div>
-          <div id="medium" className="box"><Cell className="inner" position="09"/></div>
-          <div id="medium" className="box"><Cell className="inner" position="10"/></div>
+          <Cell difficulty="medium" position="6"/>
+          <Cell difficulty="medium" position="7"/>
+          <Cell difficulty="medium" position="8"/>
+          <Cell difficulty="medium" position="9"/>
+          <Cell difficulty="medium" position="10"/>
         </div>
         <div className="row">
-          <div id="hard" className="box"><Cell className="inner" position="11"/></div>
-          <div id="hard" className="box"><Cell className="inner" position="12"/></div>
-          <div id="hard" className="box"><Cell className="inner" position="13"/></div>
-          <div id="hard" className="box"><Cell className="inner" position="14"/></div>
-          <div id="hard" className="box"><Cell className="inner" position="15"/></div>
+          <Cell difficulty="hard" position="11"/>
+          <Cell difficulty="hard" position="12"/>
+          <Cell difficulty="hard" position="13"/>
+          <Cell difficulty="hard" position="14"/>
+          <Cell difficulty="hard" position="15"/>
         </div>
         <div className="row">
-          <div id="mix" className="box"><Cell className="inner" position="16"/></div>
-          <div id="mix" className="box"><Cell className="inner" position="17"/></div>
-          <div id="mix" className="box"><Cell className="inner" position="18"/></div>
-          <div id="mix" className="box"><Cell className="inner" position="19"/></div>
-          <div id="mix" className="box"><Cell className="inner" position="20"/></div>
+          <Cell difficulty="mix" position="16"/>
+          <Cell difficulty="mix" position="17"/>
+          <Cell difficulty="mix" position="18"/>
+          <Cell difficulty="mix" position="19"/>
+          <Cell difficulty="mix" position="20"/>
         </div>
       </article>
     )

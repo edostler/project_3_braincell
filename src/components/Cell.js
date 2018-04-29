@@ -4,9 +4,9 @@ import './Cell.css';
 const Cell = (props) => {
 
   return (
-    <React.Fragment>
-      Cell {props.position}
-    </React.Fragment>
+    <article id={props.difficulty} className="box">
+      <div className="inner">Cell {props.position}</div>
+    </article>
   )
 
 }
