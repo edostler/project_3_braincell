@@ -4,7 +4,9 @@ import './End.css';
 const End = (props) => {
 
   return (
-    <p>I'm an End</p>
+    <div className="end">
+      <p>I'm an End</p>
+    </div>
   )
 
 }

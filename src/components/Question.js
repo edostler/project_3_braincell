@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import './Question.css';
 
-class Question extends Component {
+const Question = (props) => {
 
-  render(){
-    return (
-      <p>I'm a Question</p>
-    )
-  }
+  return (
+    <React.Fragment>
+      <div className="question">
+        <p>I'm a Question</p>
+        <p>Current Question: {props.currentQuestion[0]}</p>
+      </div>
+    </React.Fragment>
+  )
 
 }
 

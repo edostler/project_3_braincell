@@ -10,17 +10,18 @@ const Category = (props) => {
 
   return (
     <React.Fragment>
-      <p>I'm a Category</p>
-      <p>Number of categories to choose from: {props.playerCategories.length}</p>
+      <div className="category">
+        <p>I'm a Category</p>
+        <p>Number of categories to choose from: {props.playerCategories.length}</p>
 
-      <select
-        onChange={props.handleCategorySelect}
-        id="category-selector"
-        defaultValue="default">
-        <option disabled value="default">Choose a category...</option>
-        {options}
-      </select>
-
+        <select
+          onChange={props.handleCategorySelect}
+          id="category-selector"
+          defaultValue="default">
+          <option disabled value="default">Choose a category...</option>
+          {options}
+        </select>
+      </div>
 
     </React.Fragment>
   )

@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import './Answer.css';
 
-class Answer extends Component {
+const Answer = (props) => {
 
-  render(){
-    return (
-      <p>I'm an Answer</p>
-    )
-  }
+  return (
+    <React.Fragment>
+      <div className="answer">
+        <p>I'm an Answer</p>
+        <p>{props.answer}</p>
+      </div>
+    </React.Fragment>
+  )
 
 }
 

@@ -12,30 +12,60 @@ const MiddleContainer = (props) => {
       return null;
     }
 
-    return (
-      <React.Fragment>
-        <p>I'm a Middle Container</p>
-        <Start
-          playerName={props.playerName}
-          handlePlayerNameKeyUp={props.handlePlayerNameKeyUp}
-          handlePlayerNameSubmit={props.handlePlayerNameSubmit}
-        />
-        <Category
-          playerName={props.playerName}
-          playerCategories={props.playerCategories}
-          handleCategorySelect={props.handleCategorySelect}
-        />
-        <QuizContainer
-          playerName={props.playerName}
-          currentQuestion={props.currentQuestion}
-        />
-        <End
-          playerName={props.playerName}
-          currentPoints={props.currentPoints}
-        />
-      </React.Fragment>
-    )
-
+    if(props.gameStatus === 0) {
+      return (
+        <React.Fragment>
+          <div className="middle-container">
+            <p>I'm a Middle Container</p>
+            <Start
+              playerName={props.playerName}
+              handlePlayerNameKeyUp={props.handlePlayerNameKeyUp}
+              handlePlayerNameSubmit={props.handlePlayerNameSubmit}
+            />
+          </div>
+        </React.Fragment>
+      )
+    }
+    else if(props.gameStatus === 1) {
+      return (
+        <React.Fragment>
+          <div className="middle-container">
+            <p>I'm a Middle Container</p>
+            <Category
+              playerName={props.playerName}
+              playerCategories={props.playerCategories}
+              handleCategorySelect={props.handleCategorySelect}
+            />
+          </div>
+        </React.Fragment>
+      )
+    }
+    else if(props.gameStatus === 2) {
+      return (
+        <React.Fragment>
+          <div className="middle-container">
+            <p>I'm a Middle Container</p>
+            <QuizContainer
+              playerName={props.playerName}
+              currentQuestion={props.currentQuestion}
+            />
+          </div>
+        </React.Fragment>
+      )
+    }
+    else {
+      return (
+        <React.Fragment>
+          <div className="middle-container">
+            <p>I'm a Middle Container</p>
+            <End
+              playerName={props.playerName}
+              currentPoints={props.currentPoints}
+            />
+          </div>
+        </React.Fragment>
+      )
+    }
 
 }
 

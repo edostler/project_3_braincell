@@ -93,21 +93,23 @@ class GameContainer extends Component {
   render(){
     return (
       <React.Fragment>
-        <p>I'm a Game Container</p>
-        <p>Game Status: {this.state.gameStatus}</p>
-        <p>Player Name: {this.state.playerName}</p>
-        <p>Selected Category: {this.state.currentCategory.name}</p>
-        <CellContainer/>
-        <MiddleContainer
-          gameStatus={this.state.gameStatus}
-          playerName={this.state.playerName}
-          playerCategories={this.state.playerCategories}
-          currentQuestion={this.state.currentQuestion}
-          currentPoints={this.state.currentPoints}
-          handlePlayerNameKeyUp={this.handlePlayerNameKeyUp}
-          handlePlayerNameSubmit={this.handlePlayerNameSubmit}
-          handleCategorySelect={this.handleCategorySelect}
-        />
+        <div className="game-container">
+          <p>I'm a Game Container</p>
+          <p>Game Status: {this.state.gameStatus}</p>
+          <p>Player Name: {this.state.playerName}</p>
+          <p>Selected Category: {this.state.currentCategory.name}</p>
+          <CellContainer/>
+          <MiddleContainer
+            gameStatus={this.state.gameStatus}
+            playerName={this.state.playerName}
+            playerCategories={this.state.playerCategories}
+            currentQuestion={this.state.currentQuestion}
+            currentPoints={this.state.currentPoints}
+            handlePlayerNameKeyUp={this.handlePlayerNameKeyUp}
+            handlePlayerNameSubmit={this.handlePlayerNameSubmit}
+            handleCategorySelect={this.handleCategorySelect}
+          />
+        </div>
       </React.Fragment>
     )
   }
