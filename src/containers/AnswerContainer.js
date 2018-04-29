@@ -7,8 +7,8 @@ class AnswerContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      correctAnswer: [props.currentQuestion[1]],
-      incorrectAnswers: [props.currentQuestion[2], props.currentQuestion[3], props.currentQuestion[4]],
+      correctAnswer: [props.currentQuestion.correct_answer],
+      incorrectAnswers: [props.currentQuestion.incorrect_answers[0], props.currentQuestion.incorrect_answers[1], props.currentQuestion.incorrect_answers[2]],
       randomAnswers: []
     }
     this.handleAnswer = this.handleAnswer.bind(this);

@@ -7,7 +7,7 @@ const Question = (props) => {
     <React.Fragment>
       <div className="question">
         <p>I'm a Question</p>
-        <p>Current Question: {props.currentQuestion[0]}</p>
+        <p>Current Question: {props.currentQuestion.question}</p>
       </div>
     </React.Fragment>
   )

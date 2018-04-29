@@ -10,6 +10,7 @@ class GameContainer extends Component {
     this.state = {
       gameStatus: 0,
       // gameStatus: 0 = Start, 1 = Choose Category, 2 = In Play, 3 = End
+
       playerName: null,
 
       allCategories: [
@@ -22,6 +23,7 @@ class GameContainer extends Component {
         {id: 24,  name: "Politics",           state: 1},
         {id: 25,  name: "Art",                state: 1}
       ],         // Hard coded until we have API data
+
       playerCategories: [
         {id: 9,   name: "General Knowledge",  state: 1},
         {id: 20,  name: "Mythology",          state: 1},
@@ -32,18 +34,292 @@ class GameContainer extends Component {
         {id: 24,  name: "Politics",           state: 1},
         {id: 25,  name: "Art",                state: 1}
       ],      // Hard coded until we have API data
-      questions: [[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]]],
+
+      questions: [[[{
+        "category": "General Knowledge",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "Easy Gen Knowledge",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "General Knowledge",
+        "type": "multiple",
+        "difficulty": "medium",
+        "question": "Medium Gen Knowledge",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "General Knowledge",
+        "type": "multiple",
+        "difficulty": "hard",
+        "question": "Hard Gen Knowledge",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }]],[[{
+        "category": "Mythology",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "Easy Mythology",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "Mythology",
+        "type": "multiple",
+        "difficulty": "medium",
+        "question": "Medium Mythology",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "Mythology",
+        "type": "multiple",
+        "difficulty": "hard",
+        "question": "Hard Mythology",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }]],[[{
+        "category": "Sports",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "Easy Sports",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "Sports",
+        "type": "multiple",
+        "difficulty": "medium",
+        "question": "Medium Sports",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "Sports",
+        "type": "multiple",
+        "difficulty": "hard",
+        "question": "Hard Sports",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }]],[[{
+        "category": "Geography",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "Easy Geography",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "Geography",
+        "type": "multiple",
+        "difficulty": "medium",
+        "question": "Medium Geography",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "Geography",
+        "type": "multiple",
+        "difficulty": "hard",
+        "question": "Hard Geography",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }]],[[{
+        "category": "History",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "Easy History",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "History",
+        "type": "multiple",
+        "difficulty": "medium",
+        "question": "Medium History",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "History",
+        "type": "multiple",
+        "difficulty": "hard",
+        "question": "Hard History",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }]],[[{
+        "category": "Animals",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "Easy Animals",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "Animals",
+        "type": "multiple",
+        "difficulty": "medium",
+        "question": "Medium Animals",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "Animals",
+        "type": "multiple",
+        "difficulty": "hard",
+        "question": "Hard Animals",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }]],[[{
+        "category": "Politics",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "Easy Politics",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "Politics",
+        "type": "multiple",
+        "difficulty": "medium",
+        "question": "Medium Politics",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "Politics",
+        "type": "multiple",
+        "difficulty": "hard",
+        "question": "Hard Politics",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }]],[[{
+        "category": "Art",
+        "type": "multiple",
+        "difficulty": "easy",
+        "question": "Easy Art",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "Art",
+        "type": "multiple",
+        "difficulty": "medium",
+        "question": "Medium Art",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }],[{
+        "category": "Art",
+        "type": "multiple",
+        "difficulty": "hard",
+        "question": "Hard Art",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      }]]],
 
       currentCategory: {id: 0,   name: "To be selected...",  state: 1}, // default - might want to change this later
-      currentQuestion: [
-        "What is the colour of the sky?",
-        "Blue",
-        "Red",
-        "Green",
-        "Yellow"
-      ],      // Hard coded until we have API data
+
+      currentQuestion: {
+        "category": "",
+        "type": "",
+        "difficulty": "",
+        "question": "What's the colour of the sky?",
+        "correct_answer": "Blue",
+        "incorrect_answers":[
+          "Red",
+          "Green",
+          "Yellow"
+        ]
+      },      // Hard coded until we have API data
+
       currentCell: 0,
+
       currentPoints: 0,
+
       currentDifficulty: 1
     }
     this.handleMove = this.handleMove.bind(this);
@@ -53,6 +329,7 @@ class GameContainer extends Component {
     this.handleResult = this.handleResult.bind(this);
     this.checkIncrementDiffculty = this.checkIncrementDiffculty.bind(this);
     this.removeCategory = this.removeCategory.bind(this);
+    this.sampleQuestion = this.sampleQuestion.bind(this);
   }
 
   handleMove(){
@@ -91,6 +368,24 @@ class GameContainer extends Component {
       currentCategory: selectedCategory,
       gameStatus: 2
     });
+    this.sampleQuestion();
+  }
+
+  sampleQuestion() {
+    let index = 0;
+    let categoryIndex = null;
+    this.state.questions.forEach(function(categoryGroup) {
+      if (categoryGroup[0][0].category === this.state.currentCategory.name) {
+        categoryIndex = index;
+      }
+      index += 1;
+    }.bind(this));
+    // loop through questions to find index of selected category (by checking first question.category in each)
+    // find length of sub-array (based on difficulty as index)
+    // generate random number based on length
+    // set current question to be sampled question
+    console.log(categoryIndex);
+    // NOT COMPLETE - WORK IN PROGRESS
   }
 
   handleResult(result) {
@@ -98,6 +393,7 @@ class GameContainer extends Component {
       console.log("Correct!");
       this.setState({
         currentCell: this.state.currentCell + 1,
+        currentPoints: this.state.currentPoints + 1,
         gameStatus: 1
       });
       this.removeCategory();
