@@ -6,7 +6,7 @@ import Header from '../components/Header.js';
 
 class GameContainer extends Component {
   componentDidMount(){
-    let defaultQuestionCount = 5
+    let defaultQuestionCount = 8
     this.state.allCategories.map((category, index) => {
       if (this.state.allCategories[index].state === 1){
         // let easyQCount = 0;
@@ -21,23 +21,28 @@ class GameContainer extends Component {
             "&category=" +
             this.state.allCategories[index].id +
             "&difficulty=" +
-            difficulty +
-            "&type=multiple";
+            difficulty; // +
+            // "&type=multiple";
           fetch(url)
           .then(response => response.json())
-          .then((json) => (allCategoryQuestions.push(json.results)))
+          .then((json) => {
+            // (allCategoryQuestions.push(json.results))
+            let allQuestionsByDifficulty = [];
+            let questionsByDifficulty = (json.results)
+            questionsByDifficulty.map(questionBD => {
+              if (questionBD.type === "multiple"){
+                allQuestionsByDifficulty.push(questionBD)
+              }
+              return null;
+            })
+            allCategoryQuestions.push(allQuestionsByDifficulty)
+          })
           return null;
         })
-        // this.state.questions.push(allCategoryQuestions);
         let prevQuestionsArray = this.state.questions;
         prevQuestionsArray.push(allCategoryQuestions);
         this.setState({questions: prevQuestionsArray});
       }
-      // this.state.allCategories1 = this.state.allCategories;
-      // this.state.allCategories2 = this.state.allCategories;
-      // this.state.allCategories3 = this.state.allCategories;
-      // this.state.allCategories4 = this.state.allCategories;
-      // this.state.playerCategories = this.state.allCategories;
       return null;
     })
   }
