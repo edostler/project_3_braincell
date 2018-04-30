@@ -4,43 +4,56 @@ import CellContainer from './CellContainer';
 import MiddleContainer from './MiddleContainer';
 
 class GameContainer extends Component {
-  componentDidMount(){
-    let defaultQuestionCount = 8
+  async componentDidMount(){
+    let defaultQuestionCount = 20;
     this.state.allCategories.map((category, index) => {
       if (this.state.allCategories[index].state === 1){
-        // let easyQCount = 0;
-        // let medQCount = 0;
-        // let hardQCount = 0;
-        let qCount = [];
         this.state.categoryIndices.push({index: index, name: category.name})
         let allCategoryQuestions = [];
-        qCount = this.getQuestionCount(category.id);
-        // debugger;
-        console.log("qCount", qCount);
-        this.state.difficulties.map(difficulty => {
-          let url = "https://opentdb.com/api.php?amount=" +
-            defaultQuestionCount +
+
+        this.getQuestionCount(category.id).then(qCount => {
+          this.state.difficulties.map(difficulty => {
+            let questionCount = 0
+            switch(difficulty){
+              case "easy":
+              questionCount = qCount[0];
+              break;
+              case "medium":
+              questionCount = qCount[1];
+              break;
+              case "hard":
+              questionCount = qCount[2];
+              break;
+              default:
+              questionCount = defaultQuestionCount
+            }
+
+            if (questionCount < defaultQuestionCount){
+              defaultQuestionCount = questionCount;
+            }
+            
+            let url = "https://opentdb.com/api.php?amount=" +
+              defaultQuestionCount +
             "&category=" +
             this.state.allCategories[index].id +
             "&difficulty=" +
-            difficulty; // +
-            // "&type=multiple";
-          fetch(url)
-          .then(response => response.json())
-          .then((json) => {
-            // (allCategoryQuestions.push(json.results))
-            let allQuestionsByDifficulty = [];
-            let questionsByDifficulty = (json.results)
-            questionsByDifficulty.map(questionBD => {
-              if (questionBD.type === "multiple"){
-                allQuestionsByDifficulty.push(questionBD)
-              }
-              return null;
+            difficulty;
+            fetch(url)
+            .then(response => response.json())
+            .then((json) => {
+              let allQuestionsByDifficulty = [];
+              let questionsByDifficulty = (json.results)
+              questionsByDifficulty.map(questionBD => {
+                if (questionBD.type === "multiple"){
+                  allQuestionsByDifficulty.push(questionBD)
+                }
+                return null;
+              })
+              allCategoryQuestions.push(allQuestionsByDifficulty)
             })
-            allCategoryQuestions.push(allQuestionsByDifficulty)
+            return null;
           })
-          return null;
-        })
+        });
         let prevQuestionsArray = this.state.questions;
         prevQuestionsArray.push(allCategoryQuestions);
         this.setState({questions: prevQuestionsArray});
@@ -49,27 +62,19 @@ class GameContainer extends Component {
     })
   }
 
-  getQuestionCount(catId){ //, easyQuestionCount, mediumQuestionCount, hardQuestionCount, questionCount){
-    // console.log("cat id: ", catId, " diff: ", diff);
+  async getQuestionCount(catId){
     let questionCount = [];
     let questionCountArray = [];
     let questionCountUrl = "https://opentdb.com/api_count.php?category=" +
       catId;
-    // console.log(questionCountUrl);
-    fetch (questionCountUrl)
-    .then(response => response.json())
-    .then((json) => {
-      questionCount.push(json.category_question_count)
-      // console.log("Question Count:", questionCount[0]);
-      questionCountArray.push(questionCount[0].total_easy_question_count);
-      questionCountArray.push(questionCount[0].total_medium_question_count);
-      questionCountArray.push(questionCount[0].total_hard_question_count);
-      // console.log("Cat:", catId, "Easy:", easyQuestionCount, "Medium:", mediumQuestionCount, "Hard:", hardQuestionCount);
-      // return [easyQuestionCount, mediumQuestionCount, hardQuestionCount]
-      console.log("Cat ID:", catId, "Totals:",questionCountArray);
-      return questionCountArray;
-    });
+    let response = await fetch (questionCountUrl)
+    let json = await response.json()
 
+    questionCount.push(json.category_question_count)
+    questionCountArray.push(questionCount[0].total_easy_question_count);
+    questionCountArray.push(questionCount[0].total_medium_question_count);
+    questionCountArray.push(questionCount[0].total_hard_question_count);
+    return questionCountArray;
   }
 
   constructor(props){
