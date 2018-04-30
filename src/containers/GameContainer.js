@@ -30,11 +30,11 @@ class GameContainer extends Component {
         })
         this.state.questions.push(allCategoryQuestions)
       }
-      this.state.allCategories1 = this.state.allCategories;
-      this.state.allCategories2 = this.state.allCategories;
-      this.state.allCategories3 = this.state.allCategories;
-      this.state.allCategories4 = this.state.allCategories;
-      this.state.playerCategories = this.state.allCategories;
+      // this.state.allCategories1 = this.state.allCategories;
+      // this.state.allCategories2 = this.state.allCategories;
+      // this.state.allCategories3 = this.state.allCategories;
+      // this.state.allCategories4 = this.state.allCategories;
+      // this.state.playerCategories = this.state.allCategories;
       return null;
     })
   }
@@ -62,10 +62,6 @@ class GameContainer extends Component {
     super(props)
     this.state = {
       categoryIndices: [],
-      allCategories1: [],
-      allCategories2: [],
-      allCategories3: [],
-      playerCategories: [],
       questions: [],
       playerName: null,
       currentCell: 0,
@@ -75,6 +71,56 @@ class GameContainer extends Component {
       difficulties: ["easy", "medium", "hard"],
 
       allCategories: [
+        {id: 9, name: "General Knowledge", state: 1},
+        {id: 17, name: "Science & Nature", state: 1},
+        {id: 20, name: "Mythology", state: 1},
+        {id: 21, name: "Sports", state: 1},
+        {id: 22, name: "Geography", state: 1},
+        {id: 23, name: "History", state: 1},
+        {id: 24, name: "Politics", state: 1},
+        {id: 27, name: "Animals", state: 1}
+      ],
+      allCategories1: [
+        {id: 9, name: "General Knowledge", state: 1},
+        {id: 17, name: "Science & Nature", state: 1},
+        {id: 20, name: "Mythology", state: 1},
+        {id: 21, name: "Sports", state: 1},
+        {id: 22, name: "Geography", state: 1},
+        {id: 23, name: "History", state: 1},
+        {id: 24, name: "Politics", state: 1},
+        {id: 27, name: "Animals", state: 1}
+      ],
+      allCategories2: [
+        {id: 9, name: "General Knowledge", state: 1},
+        {id: 17, name: "Science & Nature", state: 1},
+        {id: 20, name: "Mythology", state: 1},
+        {id: 21, name: "Sports", state: 1},
+        {id: 22, name: "Geography", state: 1},
+        {id: 23, name: "History", state: 1},
+        {id: 24, name: "Politics", state: 1},
+        {id: 27, name: "Animals", state: 1}
+      ],
+      allCategories3: [
+        {id: 9, name: "General Knowledge", state: 1},
+        {id: 17, name: "Science & Nature", state: 1},
+        {id: 20, name: "Mythology", state: 1},
+        {id: 21, name: "Sports", state: 1},
+        {id: 22, name: "Geography", state: 1},
+        {id: 23, name: "History", state: 1},
+        {id: 24, name: "Politics", state: 1},
+        {id: 27, name: "Animals", state: 1}
+      ],
+      allCategories4: [
+        {id: 9, name: "General Knowledge", state: 1},
+        {id: 17, name: "Science & Nature", state: 1},
+        {id: 20, name: "Mythology", state: 1},
+        {id: 21, name: "Sports", state: 1},
+        {id: 22, name: "Geography", state: 1},
+        {id: 23, name: "History", state: 1},
+        {id: 24, name: "Politics", state: 1},
+        {id: 27, name: "Animals", state: 1}
+      ],
+      playerCategories: [
         {id: 9, name: "General Knowledge", state: 1},
         {id: 17, name: "Science & Nature", state: 1},
         {id: 20, name: "Mythology", state: 1},
