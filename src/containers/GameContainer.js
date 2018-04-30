@@ -146,7 +146,7 @@ class GameContainer extends Component {
         ]
       },      // Hard coded until we have API data
 
-      currentDifficulty: 1
+      currentDifficulty: "easy"
     }
     this.handleMove = this.handleMove.bind(this);
     this.handlePlayerNameKeyUp = this.handlePlayerNameKeyUp.bind(this);
@@ -206,12 +206,20 @@ class GameContainer extends Component {
       }
     });
     // find length of sub-array (based on difficulty as index) and generate random number based on length
-    let randomNumber = Math.floor(Math.random() * this.state.questions[categoryIndex][this.state.currentDifficulty - 1].length);
+    let difficultyIndex = null;
+    let index = 0;
+    this.state.questions[categoryIndex].forEach(function(difficultyGroup) {
+      if (difficultyGroup[0].difficulty === this.state.currentDifficulty) {
+        difficultyIndex = index;
+      }
+      index += 1;
+    }.bind(this));
+    let randomNumber = Math.floor(Math.random() * this.state.questions[categoryIndex][difficultyIndex].length);
     // set current question to be sampled question
-    let sampledQuestion = this.state.questions[categoryIndex][this.state.currentDifficulty - 1][randomNumber];
+    let sampledQuestion = this.state.questions[categoryIndex][difficultyIndex][randomNumber];
     this.setState({currentQuestion: sampledQuestion});
     // remove question from questions array
-    this.state.questions[categoryIndex][this.state.currentDifficulty - 1].splice(randomNumber, 1);
+    this.state.questions[categoryIndex][difficultyIndex].splice(randomNumber, 1);
   }
 
   handleResult(result) {
@@ -248,13 +256,13 @@ class GameContainer extends Component {
     // NEED TO RETURN TO THIS TO BUILD IN LEVEL 4 DIFFICULTY, RE. RANDOM CATEGORY IF STATEMENT IN SAMPLE QUESTION FUNCTION
     if((this.state.currentCell + 1) === 5) {
       this.setState({
-        currentDifficulty: this.state.currentDifficulty + 1,
+        currentDifficulty: "medium",
         playerCategories: this.state.allCategories1,
       });
     }
     else if ((this.state.currentCell + 1) === 10) {
       this.setState({
-        currentDifficulty: this.state.currentDifficulty + 1,
+        currentDifficulty: "hard",
         playerCategories: this.state.allCategories2,
       });
     }
