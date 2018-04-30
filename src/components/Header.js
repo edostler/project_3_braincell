@@ -9,7 +9,7 @@ const Header = (props) => {
       <React.Fragment>
         {/* <h1>Hello {props.playerName} welcome to BrainCell!</h1> */}
         {/* <p>You have earned {props.currentPoints} points, well done!!</p> */}
-        <h1 className="header-title">Hello, welcome to BrainCell!</h1>
+        <h1 className="header-title">Welcome to BrainCell!</h1>
         <img
           className="header-logo"
           src="BrainCell_Framed.png"
