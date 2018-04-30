@@ -11,9 +11,12 @@ class GameContainer extends Component {
         // let easyQCount = 0;
         // let medQCount = 0;
         // let hardQCount = 0;
+        let qCount = [];
         this.state.categoryIndices.push({index: index, name: category.name})
         let allCategoryQuestions = [];
-        // this.getQuestionCount(category.id);
+        qCount = this.getQuestionCount(category.id);
+        // debugger;
+        console.log("qCount", qCount);
         this.state.difficulties.map(difficulty => {
           let url = "https://opentdb.com/api.php?amount=" +
             defaultQuestionCount +
@@ -46,35 +49,34 @@ class GameContainer extends Component {
     })
   }
 
-  // getQuestionCount(catId, easyQuestionCount, mediumQuestionCount, hardQuestionCount){
-  //   // console.log("cat id: ", catId, " diff: ", diff);
-  //   let questionCount = [];
-  //   let questionCountUrl = "https://opentdb.com/api_count.php?category=" +
-  //     catId;
-  //   // console.log(questionCountUrl);
-  //   fetch (questionCountUrl)
-  //   .then(response => response.json())
-  //   .then((json) => {
-  //     questionCount.push(json.category_question_count)
-  //     // console.log("Question Count:", questionCount[0]);
-  //     easyQuestionCount = questionCount[0].total_easy_question_count;
-  //     mediumQuestionCount = questionCount[0].total_medium_question_count;
-  //     hardQuestionCount = questionCount[0].total_hard_question_count;
-  //     console.log("Cat:", catId, "Easy:", easyQuestionCount, "Medium:", mediumQuestionCount, "Hard:", hardQuestionCount);
-  //     return (easyQuestionCount, mediumQuestionCount, hardQuestionCount)
-  //   });
-  // }
+  getQuestionCount(catId){ //, easyQuestionCount, mediumQuestionCount, hardQuestionCount, questionCount){
+    // console.log("cat id: ", catId, " diff: ", diff);
+    let questionCount = [];
+    let questionCountArray = [];
+    let questionCountUrl = "https://opentdb.com/api_count.php?category=" +
+      catId;
+    // console.log(questionCountUrl);
+    fetch (questionCountUrl)
+    .then(response => response.json())
+    .then((json) => {
+      questionCount.push(json.category_question_count)
+      // console.log("Question Count:", questionCount[0]);
+      questionCountArray.push(questionCount[0].total_easy_question_count);
+      questionCountArray.push(questionCount[0].total_medium_question_count);
+      questionCountArray.push(questionCount[0].total_hard_question_count);
+      // console.log("Cat:", catId, "Easy:", easyQuestionCount, "Medium:", mediumQuestionCount, "Hard:", hardQuestionCount);
+      // return [easyQuestionCount, mediumQuestionCount, hardQuestionCount]
+      console.log("Cat ID:", catId, "Totals:",questionCountArray);
+      return questionCountArray;
+    });
+
+  }
 
   constructor(props){
     super(props)
     this.state = {
       categoryIndices: [],
       questions: [],
-      // allCategories1: [],
-      // allCategories2: [],
-      // allCategories3: [],
-      // allCategories4: [],
-      // playerCategories: [],
       playerName: null,
       currentCell: 0,
       currentPoints: 0,
