@@ -221,6 +221,7 @@ class GameContainer extends Component {
     this.setState({currentQuestion: sampledQuestion});
     // remove question from questions array
     this.state.questions[categoryIndex][difficultyIndex].splice(randomNumber, 1);
+    console.log(sampledQuestion.difficulty);
   }
 
   handleResult(result) {
