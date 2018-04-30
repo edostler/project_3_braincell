@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './GameContainer.css';
 import CellContainer from './CellContainer';
 import MiddleContainer from './MiddleContainer';
+import Header from '../components/Header.js';
 
 class GameContainer extends Component {
 
@@ -54,6 +55,10 @@ class GameContainer extends Component {
     return (
       <React.Fragment>
         <p>I'm a Game Container</p>
+        <Header
+          playerName={this.state.playerName}
+          currentPoints={this.state.currentPoints}
+        />
         <CellContainer/>
         <MiddleContainer
           gameStatus={this.state.gameStatus}
