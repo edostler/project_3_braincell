@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './GameContainer.css';
 import CellContainer from './CellContainer';
 import MiddleContainer from './MiddleContainer';
-import Header from '../components/Header.js';
 
 class GameContainer extends Component {
   componentDidMount(){
@@ -277,10 +276,6 @@ class GameContainer extends Component {
           <p>Game Status: {this.state.gameStatus}</p>
           <p>Player Name: {this.state.playerName}</p>
           <p>Selected Category: {this.state.currentCategory.name}</p>
-          <Header
-            playerName={this.state.playerName}
-            currentPoints={this.state.currentPoints}
-          />
           <CellContainer
             currentCell={this.state.currentCell}
           />
