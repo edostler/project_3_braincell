@@ -145,12 +145,14 @@ class GameContainer extends Component {
         ]
       },      // Hard coded until we have API data
 
-      currentDifficulty: "easy"
+      currentDifficulty: "easy",
+      currentDifficultyValue: "1"
     }
     this.handleMove = this.handleMove.bind(this);
     this.handlePlayerNameKeyUp = this.handlePlayerNameKeyUp.bind(this);
     this.handlePlayerNameSubmit = this.handlePlayerNameSubmit.bind(this);
     this.handleCategorySelect = this.handleCategorySelect.bind(this);
+    this.handleCategoryRandomise = this.handleCategoryRandomise.bind(this);
     this.handleResult = this.handleResult.bind(this);
     this.checkIncrementDiffculty = this.checkIncrementDiffculty.bind(this);
     this.removeCategory = this.removeCategory.bind(this);
@@ -189,6 +191,16 @@ class GameContainer extends Component {
   handleCategorySelect(event){
     const index = event.target.value;
     const selectedCategory = this.state.playerCategories[index];
+    this.setState({
+      currentCategory: selectedCategory,
+      gameStatus: 2
+    });
+    this.sampleQuestion(selectedCategory);
+  }
+
+  handleCategoryRandomise(){
+    const randomNumber = Math.floor(Math.random() * this.state.playerCategories.length);
+    const selectedCategory = this.state.playerCategories[randomNumber];
     this.setState({
       currentCategory: selectedCategory,
       gameStatus: 2
@@ -252,18 +264,24 @@ class GameContainer extends Component {
   }
 
   checkIncrementDiffculty() {
-    // if((this.state.currentCell + 1) === 5 || (this.state.currentCell + 1) === 10 || (this.state.currentCell + 1) === 15) {
-    // NEED TO RETURN TO THIS TO BUILD IN LEVEL 4 DIFFICULTY, RE. RANDOM CATEGORY IF STATEMENT IN SAMPLE QUESTION FUNCTION
     if((this.state.currentCell + 1) === 5) {
       this.setState({
         currentDifficulty: "medium",
+        currentDifficultyValue: 2,
         playerCategories: this.state.allCategories1,
       });
     }
     else if ((this.state.currentCell + 1) === 10) {
       this.setState({
         currentDifficulty: "hard",
+        currentDifficultyValue: 3,
         playerCategories: this.state.allCategories2,
+      });
+    }
+    else if ((this.state.currentCell + 1) === 15) {
+      this.setState({
+        currentDifficultyValue: 4,
+        playerCategories: this.state.allCategories3,
       });
     }
   }
@@ -288,7 +306,9 @@ class GameContainer extends Component {
             handlePlayerNameKeyUp={this.handlePlayerNameKeyUp}
             handlePlayerNameSubmit={this.handlePlayerNameSubmit}
             handleCategorySelect={this.handleCategorySelect}
+            handleCategoryRandomise={this.handleCategoryRandomise}
             handleResult={this.handleResult}
+            currentDifficultyValue={this.state.currentDifficultyValue}
           />
         </div>
       </React.Fragment>
