@@ -1,0 +1,17 @@
+.chart-container {
+  margin: 0 auto;
+
+  border-style: solid;
+  background-color: white;
+  color: black;
+  font-size: 10px;
+
+  position: fixed;
+  top: 80px;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  overflow: auto;
+
+  z-index: -2;
+}
