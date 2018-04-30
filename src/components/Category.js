@@ -28,7 +28,7 @@ const Category = (props) => {
   else {
     props.handleCategoryRandomise();
     return (
-      <h1></h1>
+      <h1>.</h1>
     )
   }
 

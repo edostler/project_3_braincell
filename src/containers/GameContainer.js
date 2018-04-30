@@ -79,46 +79,7 @@ class GameContainer extends Component {
         {id: 24, name: "Politics", state: 1},
         {id: 27, name: "Animals", state: 1}
       ],
-      allCategories1: [
-        {id: 9, name: "General Knowledge", state: 1},
-        {id: 17, name: "Science & Nature", state: 1},
-        {id: 20, name: "Mythology", state: 1},
-        {id: 21, name: "Sports", state: 1},
-        {id: 22, name: "Geography", state: 1},
-        {id: 23, name: "History", state: 1},
-        {id: 24, name: "Politics", state: 1},
-        {id: 27, name: "Animals", state: 1}
-      ],
-      allCategories2: [
-        {id: 9, name: "General Knowledge", state: 1},
-        {id: 17, name: "Science & Nature", state: 1},
-        {id: 20, name: "Mythology", state: 1},
-        {id: 21, name: "Sports", state: 1},
-        {id: 22, name: "Geography", state: 1},
-        {id: 23, name: "History", state: 1},
-        {id: 24, name: "Politics", state: 1},
-        {id: 27, name: "Animals", state: 1}
-      ],
-      allCategories3: [
-        {id: 9, name: "General Knowledge", state: 1},
-        {id: 17, name: "Science & Nature", state: 1},
-        {id: 20, name: "Mythology", state: 1},
-        {id: 21, name: "Sports", state: 1},
-        {id: 22, name: "Geography", state: 1},
-        {id: 23, name: "History", state: 1},
-        {id: 24, name: "Politics", state: 1},
-        {id: 27, name: "Animals", state: 1}
-      ],
-      allCategories4: [
-        {id: 9, name: "General Knowledge", state: 1},
-        {id: 17, name: "Science & Nature", state: 1},
-        {id: 20, name: "Mythology", state: 1},
-        {id: 21, name: "Sports", state: 1},
-        {id: 22, name: "Geography", state: 1},
-        {id: 23, name: "History", state: 1},
-        {id: 24, name: "Politics", state: 1},
-        {id: 27, name: "Animals", state: 1}
-      ],
+
       playerCategories: [
         {id: 9, name: "General Knowledge", state: 1},
         {id: 17, name: "Science & Nature", state: 1},
@@ -254,12 +215,11 @@ class GameContainer extends Component {
   }
 
   removeCategory(){
-    let index = 0;
     this.state.playerCategories.forEach(function(category) {
       if (category === this.state.currentCategory) {
-        this.state.playerCategories.splice(index, 1);
+        let filteredArray = this.state.playerCategories.filter(item => item !== this.state.currentCategory);
+        this.setState({playerCategories: filteredArray});
       }
-      index += 1;
     }.bind(this));
   }
 
@@ -268,20 +228,20 @@ class GameContainer extends Component {
       this.setState({
         currentDifficulty: "medium",
         currentDifficultyValue: 2,
-        playerCategories: this.state.allCategories1,
+        playerCategories: this.state.allCategories,
       });
     }
     else if ((this.state.currentCell + 1) === 10) {
       this.setState({
         currentDifficulty: "hard",
         currentDifficultyValue: 3,
-        playerCategories: this.state.allCategories2,
+        playerCategories: this.state.allCategories,
       });
     }
     else if ((this.state.currentCell + 1) === 15) {
       this.setState({
         currentDifficultyValue: 4,
-        playerCategories: this.state.allCategories3,
+        playerCategories: this.state.allCategories,
       });
     }
   }
