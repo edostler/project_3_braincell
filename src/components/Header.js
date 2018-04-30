@@ -2,7 +2,6 @@ import React from 'react';
 import './Header.css';
 
 const Header = (props) =>{
-  console.log(props.playerName);
   if (!props.playerName){
     return "Welcome to BrainCell!!"
   }

@@ -6,18 +6,15 @@ import Header from '../components/Header.js';
 
 class GameContainer extends Component {
   componentDidMount(){
-    // let allQuestions = [];
     let defaultQuestionCount = 5
     this.state.allCategories.map((category, index) => {
       if (this.state.allCategories[index].state === 1){
         // let easyQCount = 0;
         // let medQCount = 0;
         // let hardQCount = 0;
+        this.state.categoryIndices.push({index: index, name: category.name})
         let allCategoryQuestions = [];
-        // console.log(category.id);
         // this.getQuestionCount(category.id);
-        // console.log("Easy:", easyQCount, "Medium:", medQCount, "Hard:", hardQCount);
-        // console.log(easyQCount);
         this.state.difficulties.map(difficulty => {
           let url = "https://opentdb.com/api.php?amount=" +
             defaultQuestionCount +
@@ -29,18 +26,17 @@ class GameContainer extends Component {
           fetch(url)
           .then(response => response.json())
           .then((json) => (allCategoryQuestions.push(json.results)))
-          // .then(blah =>
-          // this.setState({questions: allQuestions}));
           return null;
         })
         this.state.questions.push(allCategoryQuestions)
       }
+      this.state.allCategories1 = this.state.allCategories;
+      this.state.allCategories2 = this.state.allCategories;
+      this.state.allCategories3 = this.state.allCategories;
+      this.state.allCategories4 = this.state.allCategories;
+      this.state.playerCategories = this.state.allCategories;
       return null;
     })
-    // console.log("All Questions", allQuestions);
-    // this.setState({questions: allQuestions})
-    // this.state.questions = allQuestions;
-    console.log("this State", this.state.questions);
   }
 
   // getQuestionCount(catId, easyQuestionCount, mediumQuestionCount, hardQuestionCount){
@@ -65,22 +61,18 @@ class GameContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
+      categoryIndices: [],
+      allCategories1: [],
+      allCategories2: [],
+      allCategories3: [],
+      playerCategories: [],
+      questions: [],
+      playerName: null,
+      currentCell: 0,
+      currentPoints: 0,
       gameStatus: 0,
       // gameStatus: 0 = Start, 1 = Choose Category, 2 = In Play, 3 = End
-
-      playerName: null,
-
       difficulties: ["easy", "medium", "hard"],
-
-      categoryIndices: [
-        {index: 0,  name: "General Knowledge"},
-        {index: 1,  name: "Mythology"},
-        {index: 2,  name: "Sports"},
-        {index: 3,  name: "Geography"},
-        {index: 4,  name: "History"},
-        {index: 5,  name: "Animals"},
-        {index: 6,  name: "Politics"},
-      ],
 
       allCategories: [
         {id: 9, name: "General Knowledge", state: 1},
@@ -91,30 +83,7 @@ class GameContainer extends Component {
         {id: 23, name: "History", state: 1},
         {id: 24, name: "Politics", state: 1},
         {id: 27, name: "Animals", state: 1}
-      ],         // Hard coded until we have API data
-      allCategories2: [
-        {id: 9, name: "General Knowledge", state: 1},
-        {id: 17, name: "Science & Nature", state: 1},
-        {id: 20, name: "Mythology", state: 1},
-        {id: 21, name: "Sports", state: 1},
-        {id: 22, name: "Geography", state: 1},
-        {id: 23, name: "History", state: 1},
-        {id: 24, name: "Politics", state: 1},
-        {id: 27, name: "Animals", state: 1}
-      ],         // Hard coded until we have API data
-
-      playerCategories: [
-        {id: 9, name: "General Knowledge", state: 1},
-        {id: 17, name: "Science & Nature", state: 1},
-        {id: 20, name: "Mythology", state: 1},
-        {id: 21, name: "Sports", state: 1},
-        {id: 22, name: "Geography", state: 1},
-        {id: 23, name: "History", state: 1},
-        {id: 24, name: "Politics", state: 1},
-        {id: 27, name: "Animals", state: 1}
-      ],      // Hard coded until we have API data
-
-      questions: [],
+      ],
 
       currentCategory: {id: 0,   name: "To be selected...",  state: 1}, // default - might want to change this later
 
@@ -130,10 +99,6 @@ class GameContainer extends Component {
           "Yellow"
         ]
       },      // Hard coded until we have API data
-
-      currentCell: 0,
-
-      currentPoints: 0,
 
       currentDifficulty: 1
     }
@@ -238,7 +203,7 @@ class GameContainer extends Component {
     if((this.state.currentCell + 1) === 5) {
       this.setState({
         currentDifficulty: this.state.currentDifficulty + 1,
-        playerCategories: this.state.allCategories,
+        playerCategories: this.state.allCategories1,
       });
     }
     else if ((this.state.currentCell + 1) === 10) {
