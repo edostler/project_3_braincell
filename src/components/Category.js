@@ -8,23 +8,30 @@ const Category = (props) => {
     return <option value={index} key={index}>{category.name}</option>
   });
 
-  return (
-    <React.Fragment>
-      <div className="category">
-        <p>I'm a Category</p>
-        <p>Number of categories to choose from: {props.playerCategories.length}</p>
+  if(props.currentDifficultyValue < 4) {
+    return (
+      <React.Fragment>
+        <div className="category">
+          <p>I'm a Category</p>
+          <p>Number of categories to choose from: {props.playerCategories.length}</p>
+          <select
+            onChange={props.handleCategorySelect}
+            id="category-selector"
+            defaultValue="default">
+            <option disabled value="default">Choose a category...</option>
+            {options}
+          </select>
+        </div>
+      </React.Fragment>
+    )
+  }
+  else {
+    props.handleCategoryRandomise();
+    return (
+      <h1></h1>
+    )
+  }
 
-        <select
-          onChange={props.handleCategorySelect}
-          id="category-selector"
-          defaultValue="default">
-          <option disabled value="default">Choose a category...</option>
-          {options}
-        </select>
-      </div>
-
-    </React.Fragment>
-  )
 
 }
 
