@@ -11,6 +11,7 @@ const Header = (props) =>{
         {/* <p>You have earned {props.currentPoints} points, well done!!</p> */}
         <h1 className="header-title">Hello, welcome to BrainCell!</h1>
         <img className="header-logo" src="BrainCell_Framed.png" alt=""/>
+        <img className="chart-icon" src="chart-icon.png" alt=""/>
       </React.Fragment>
     );
   };

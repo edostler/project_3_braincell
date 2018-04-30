@@ -169,15 +169,19 @@ class GameContainer extends Component {
     this.sampleQuestion(selectedCategory);
   }
 
-  sampleQuestion(selectedCategory) {
-    // loop through questions to find index of selected category (by checking first question.category in each easy category)
+  findCategoryIndex(selectedCategory) {
+    // loop through categoryIndices to find index of selected category
     let categoryIndex = null;
     this.state.categoryIndices.forEach(function(categoryGroup) {
       if (categoryGroup.name === selectedCategory.name) {
         categoryIndex = categoryGroup.index;
       }
     });
-    // find length of sub-array (based on difficulty as index) and generate random number based on length
+    return categoryIndex;
+  }
+
+  findDifficultyIndex(categoryIndex) {
+    // loop through questions to find index of current difficulty in selected category
     let difficultyIndex = null;
     let index = 0;
     this.state.questions[categoryIndex].forEach(function(difficultyGroup) {
@@ -186,12 +190,23 @@ class GameContainer extends Component {
       }
       index += 1;
     }.bind(this));
-    let randomNumber = Math.floor(Math.random() * this.state.questions[categoryIndex][difficultyIndex].length);
+    return difficultyIndex;
+  }
+
+  sampleQuestion(selectedCategory) {
+    const categoryIndex = this.findCategoryIndex(selectedCategory);
+    const difficultyIndex = this.findDifficultyIndex(categoryIndex);
+    // generate random number based on length of current category and difficulty
+    const randomNumber = Math.floor(Math.random() * this.state.questions[categoryIndex][difficultyIndex].length);
+    // set sampled question using categoryIndex, difficultyIndex and randomNumber
+    const sampledQuestion = this.state.questions[categoryIndex][difficultyIndex][randomNumber];
     // set current question to be sampled question
-    let sampledQuestion = this.state.questions[categoryIndex][difficultyIndex][randomNumber];
     this.setState({currentQuestion: sampledQuestion});
-    // remove question from questions array
-    this.state.questions[categoryIndex][difficultyIndex].splice(randomNumber, 1);
+    // remove sampled question from questions array
+    const filteredDifficultyArray = this.state.questions[categoryIndex][difficultyIndex].filter(item => item !== sampledQuestion);
+    let filteredArray = this.state.questions;
+    filteredArray[categoryIndex][difficultyIndex] = filteredDifficultyArray;
+    this.setState({questions: filteredArray});
     console.log(sampledQuestion.difficulty);
   }
 
