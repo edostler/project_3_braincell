@@ -31,7 +31,7 @@ class GameContainer extends Component {
             if (questionCount < defaultQuestionCount){
               defaultQuestionCount = questionCount;
             }
-            
+
             let url = "https://opentdb.com/api.php?amount=" +
               defaultQuestionCount +
             "&category=" +
@@ -172,30 +172,32 @@ class GameContainer extends Component {
   handleCategorySelect(event){
     const index = event.target.value;
     const selectedCategory = this.state.playerCategories[index];
+    this.sampleQuestion(selectedCategory);
     this.setState({
       currentCategory: selectedCategory,
       gameStatus: 2
     });
-    this.sampleQuestion(selectedCategory);
   }
 
   handleCategoryRandomise(){
     const randomNumber = Math.floor(Math.random() * this.state.playerCategories.length);
     const selectedCategory = this.state.playerCategories[randomNumber];
+    this.sampleQuestion(selectedCategory);
     this.setState({
       currentCategory: selectedCategory,
       gameStatus: 2
     });
-    this.sampleQuestion(selectedCategory);
   }
 
   findCategoryIndex(selectedCategory) {
     // loop through categoryIndices to find index of selected category
     let categoryIndex = null;
-    this.state.categoryIndices.forEach(function(categoryGroup) {
+    let index = 0;
+    this.state.allCategories.forEach(function(categoryGroup) {
       if (categoryGroup.name === selectedCategory.name) {
-        categoryIndex = categoryGroup.index;
+        categoryIndex = index;
       }
+      index += 1;
     });
     return categoryIndex;
   }
@@ -228,9 +230,11 @@ class GameContainer extends Component {
   sampleQuestion(selectedCategory) {
     const categoryIndex = this.findCategoryIndex(selectedCategory);
     const difficultyIndex = this.findDifficultyIndex(categoryIndex);
-    // debugger;
     // get length of array prior to removal of sampled question
-    const difficultyArrayLength = this.state.questions[categoryIndex][difficultyIndex].length;
+    let difficultyArrayLength = null;
+    if (this.state.questions[categoryIndex][difficultyIndex]) {
+      difficultyArrayLength = this.state.questions[categoryIndex][difficultyIndex].length;
+    }
     // generate random number based on length of current category and difficulty and get length of array prior to removal of sampled question
     const randomNumber = Math.floor(Math.random() * difficultyArrayLength);
     // set sampled question using categoryIndex, difficultyIndex and randomNumber
@@ -245,31 +249,56 @@ class GameContainer extends Component {
     console.log(sampledQuestion.difficulty);
     // if sampled question was last in difficulty then remove category from playerCategories
     if (difficultyArrayLength === 1) {
-      this.state.playerCategories.forEach(function(category) {
-        if (category === this.state.currentCategory) {
-          let filteredCategoryArray = this.state.playerCategories.filter(item => item !== this.state.currentCategory);
-          this.setState({playerCategories: filteredCategoryArray});
-        }
-      }.bind(this));
+      let filteredCategoryArray = this.state.playerCategories.filter(item => item !== selectedCategory);
+      this.setState({playerCategories: filteredCategoryArray});
     }
   }
 
   handleResult(result) {
     if(result) {
       console.log("Correct!");
+      const nextCell = this.state.currentCell + 1
       this.setState({
-        currentCell: this.state.currentCell + 1,
+        currentCell: nextCell,
         currentPoints: this.state.currentPoints + 1,
-        gameStatus: 1
       });
-      this.removeCategory();
-      this.checkIncrementDiffculty();
+      if(this.state.currentDifficultyValue < 4) {
+        this.removeCategory();
+        this.checkIncrementDiffculty();
+      }
+      if (nextCell !== 20) {
+        if (this.state.playerCategories.length === 0) {
+          console.log("Out of Questions: Game Over!");
+          this.setState({
+            gameStatus: 3
+          });
+        }
+        else {
+          this.setState({
+            gameStatus: 1
+          });
+        }
+      }
+      else {
+        console.log("Conglatulations!");
+        this.setState({
+          gameStatus: 3
+        });
+      }
     }
     else {
       console.log("Incorrect!");
-      this.setState({
-        gameStatus: 1
-      })
+      if (this.state.playerCategories.length === 0) {
+        console.log("Out of Questions: Game Over!");
+        this.setState({
+          gameStatus: 3
+        });
+      }
+      else {
+        this.setState({
+          gameStatus: 1
+        });
+      }
     }
   }
 
@@ -280,6 +309,40 @@ class GameContainer extends Component {
         this.setState({playerCategories: filteredCategoryArray});
       }
     }.bind(this));
+  }
+
+  removeExhaustedHardCategories(){
+    let remainingHardCategories = this.state.allCategories;
+    let categoryIndex = 0;
+    let flagArray = [0,0,0,0,0,0,0,0];
+    this.state.questions.forEach(function(categoryGroup) {
+      let hardDifficultyIndex = null;
+      let index = 0;
+      categoryGroup.forEach(function(difficultyGroup) {
+        if (difficultyGroup[0]) {
+          if (difficultyGroup[0].difficulty === "hard") {
+            hardDifficultyIndex = index;
+          }
+        }
+        index += 1;
+      });
+      if (hardDifficultyIndex === null) {
+        flagArray[categoryIndex] = 1;
+      }
+      categoryIndex += 1;
+    });
+    let flagIndex = 0;
+    let flaggedCategory = null;
+    let filteredCategoryArray = null;
+    flagArray.forEach(function(flag) {
+      if(flag === 1) {
+        flaggedCategory = this.state.allCategories[flagIndex];
+        filteredCategoryArray = remainingHardCategories.filter(item => item !== flaggedCategory);
+        remainingHardCategories = filteredCategoryArray;
+      }
+      flagIndex += 1;
+    }.bind(this));
+    return remainingHardCategories;
   }
 
   checkIncrementDiffculty() {
@@ -298,9 +361,10 @@ class GameContainer extends Component {
       });
     }
     else if ((this.state.currentCell + 1) === 15) {
+      const remainingHardCategories = this.removeExhaustedHardCategories()
       this.setState({
         currentDifficultyValue: 4,
-        playerCategories: this.state.allCategories,
+        playerCategories: remainingHardCategories,
       });
     }
   }
