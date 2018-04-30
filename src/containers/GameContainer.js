@@ -28,7 +28,10 @@ class GameContainer extends Component {
           .then((json) => (allCategoryQuestions.push(json.results)))
           return null;
         })
-        this.state.questions.push(allCategoryQuestions)
+        // this.state.questions.push(allCategoryQuestions);
+        let prevQuestionsArray = this.state.questions;
+        prevQuestionsArray.push(allCategoryQuestions);
+        this.setState({questions: prevQuestionsArray});
       }
       // this.state.allCategories1 = this.state.allCategories;
       // this.state.allCategories2 = this.state.allCategories;
@@ -63,6 +66,11 @@ class GameContainer extends Component {
     this.state = {
       categoryIndices: [],
       questions: [],
+      // allCategories1: [],
+      // allCategories2: [],
+      // allCategories3: [],
+      // allCategories4: [],
+      // playerCategories: [],
       playerName: null,
       currentCell: 0,
       currentPoints: 0,
