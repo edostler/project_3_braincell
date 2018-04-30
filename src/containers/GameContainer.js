@@ -185,8 +185,20 @@ class GameContainer extends Component {
     let difficultyIndex = null;
     let index = 0;
     this.state.questions[categoryIndex].forEach(function(difficultyGroup) {
-      if (difficultyGroup[0].difficulty === this.state.currentDifficulty) {
-        difficultyIndex = index;
+      if (difficultyGroup[0]) {
+        if (difficultyGroup[0].difficulty === this.state.currentDifficulty) {
+          difficultyIndex = index;
+        }
+      }
+      else if (difficultyGroup[1]) {
+        if (difficultyGroup[1].difficulty === this.state.currentDifficulty) {
+          difficultyIndex = index;
+        }
+      }
+      else if (difficultyGroup[2]) {
+        if (difficultyGroup[2].difficulty === this.state.currentDifficulty) {
+          difficultyIndex = index;
+        }
       }
       index += 1;
     }.bind(this));
@@ -196,18 +208,30 @@ class GameContainer extends Component {
   sampleQuestion(selectedCategory) {
     const categoryIndex = this.findCategoryIndex(selectedCategory);
     const difficultyIndex = this.findDifficultyIndex(categoryIndex);
-    // generate random number based on length of current category and difficulty
-    const randomNumber = Math.floor(Math.random() * this.state.questions[categoryIndex][difficultyIndex].length);
+    // debugger;
+    // get length of array prior to removal of sampled question
+    const difficultyArrayLength = this.state.questions[categoryIndex][difficultyIndex].length;
+    // generate random number based on length of current category and difficulty and get length of array prior to removal of sampled question
+    const randomNumber = Math.floor(Math.random() * difficultyArrayLength);
     // set sampled question using categoryIndex, difficultyIndex and randomNumber
     const sampledQuestion = this.state.questions[categoryIndex][difficultyIndex][randomNumber];
     // set current question to be sampled question
     this.setState({currentQuestion: sampledQuestion});
     // remove sampled question from questions array
     const filteredDifficultyArray = this.state.questions[categoryIndex][difficultyIndex].filter(item => item !== sampledQuestion);
-    let filteredArray = this.state.questions;
-    filteredArray[categoryIndex][difficultyIndex] = filteredDifficultyArray;
-    this.setState({questions: filteredArray});
+    let filteredQuestionArray = this.state.questions;
+    filteredQuestionArray[categoryIndex][difficultyIndex] = filteredDifficultyArray;
+    this.setState({questions: filteredQuestionArray});
     console.log(sampledQuestion.difficulty);
+    // if sampled question was last in difficulty then remove category from playerCategories
+    if (difficultyArrayLength === 1) {
+      this.state.playerCategories.forEach(function(category) {
+        if (category === this.state.currentCategory) {
+          let filteredCategoryArray = this.state.playerCategories.filter(item => item !== this.state.currentCategory);
+          this.setState({playerCategories: filteredCategoryArray});
+        }
+      }.bind(this));
+    }
   }
 
   handleResult(result) {
@@ -232,8 +256,8 @@ class GameContainer extends Component {
   removeCategory(){
     this.state.playerCategories.forEach(function(category) {
       if (category === this.state.currentCategory) {
-        let filteredArray = this.state.playerCategories.filter(item => item !== this.state.currentCategory);
-        this.setState({playerCategories: filteredArray});
+        let filteredCategoryArray = this.state.playerCategories.filter(item => item !== this.state.currentCategory);
+        this.setState({playerCategories: filteredCategoryArray});
       }
     }.bind(this));
   }
