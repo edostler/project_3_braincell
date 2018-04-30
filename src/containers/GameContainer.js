@@ -4,81 +4,62 @@ import CellContainer from './CellContainer';
 import MiddleContainer from './MiddleContainer';
 
 class GameContainer extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      questions: [],
-      categories: [
-        {id: 9, name: "General Knowledge", state: 1},
-        {id: 17, name: "Science & Nature", state: 1},
-        {id: 20, name: "Mythology", state: 1},
-        {id: 21, name: "Sports", state: 1},
-        {id: 22, name: "Geography", state: 1},
-        {id: 23, name: "History", state: 1},
-        {id: 24, name: "Politics", state: 1},
-        {id: 25, name: "Art", state: 0},
-        {id: 27, name: "Animals", state: 1}
-      ],
-      difficulties: ["easy", "medium", "hard"]
-      // difficulties: ["easy"]
-    };
-    this.getQuestionCount = this.getQuestionCount.bind(this);
-    // this.handleCategorySelected = this.handleCategorySelected.bind(this);
-    // this.handleFormSubmit = this.handleFormSubmit.bind(this);
-  }
-
   componentDidMount(){
-    let allQuestions = [];
+    // let allQuestions = [];
     let defaultQuestionCount = 5
-    const questionCategories = this.state.categories.map((category, index) => {
-      if (this.state.categories[index].state === 1){
-        let easyQCount = 0;
-        let medQCount = 0;
-        let hardQCount = 0;
+    this.state.allCategories.map((category, index) => {
+      if (this.state.allCategories[index].state === 1){
+        // let easyQCount = 0;
+        // let medQCount = 0;
+        // let hardQCount = 0;
+        let allCategoryQuestions = [];
         // console.log(category.id);
         // this.getQuestionCount(category.id);
         // console.log("Easy:", easyQCount, "Medium:", medQCount, "Hard:", hardQCount);
         // console.log(easyQCount);
-        const questionDifficulty = this.state.difficulties.map(difficulty => {
+        this.state.difficulties.map(difficulty => {
           let url = "https://opentdb.com/api.php?amount=" +
             defaultQuestionCount +
             "&category=" +
-            this.state.categories[index].id +
+            this.state.allCategories[index].id +
             "&difficulty=" +
             difficulty +
             "&type=multiple";
           fetch(url)
           .then(response => response.json())
-          .then((json) => (allQuestions.push(json.results)))
+          .then((json) => (allCategoryQuestions.push(json.results)))
           // .then(blah =>
           // this.setState({questions: allQuestions}));
+          return null;
         })
+        this.state.questions.push(allCategoryQuestions)
       }
+      return null;
     })
-    console.log("All Questions", allQuestions);
+    // console.log("All Questions", allQuestions);
     // this.setState({questions: allQuestions})
-    this.state.questions = allQuestions;
+    // this.state.questions = allQuestions;
     console.log("this State", this.state.questions);
   }
 
-  getQuestionCount(catId, easyQuestionCount, mediumQuestionCount, hardQuestionCount){
-    // console.log("cat id: ", catId, " diff: ", diff);
-    let questionCount = [];
-    let questionCountUrl = "https://opentdb.com/api_count.php?category=" +
-      catId;
-    // console.log(questionCountUrl);
-    fetch (questionCountUrl)
-    .then(response => response.json())
-    .then((json) => {
-      questionCount.push(json.category_question_count)
-      // console.log("Question Count:", questionCount[0]);
-      easyQuestionCount = questionCount[0].total_easy_question_count;
-      mediumQuestionCount = questionCount[0].total_medium_question_count;
-      hardQuestionCount = questionCount[0].total_hard_question_count;
-      console.log("Cat:", catId, "Easy:", easyQuestionCount, "Medium:", mediumQuestionCount, "Hard:", hardQuestionCount);
-      return (easyQuestionCount, mediumQuestionCount, hardQuestionCount)
-    });
-  }
+  // getQuestionCount(catId, easyQuestionCount, mediumQuestionCount, hardQuestionCount){
+  //   // console.log("cat id: ", catId, " diff: ", diff);
+  //   let questionCount = [];
+  //   let questionCountUrl = "https://opentdb.com/api_count.php?category=" +
+  //     catId;
+  //   // console.log(questionCountUrl);
+  //   fetch (questionCountUrl)
+  //   .then(response => response.json())
+  //   .then((json) => {
+  //     questionCount.push(json.category_question_count)
+  //     // console.log("Question Count:", questionCount[0]);
+  //     easyQuestionCount = questionCount[0].total_easy_question_count;
+  //     mediumQuestionCount = questionCount[0].total_medium_question_count;
+  //     hardQuestionCount = questionCount[0].total_hard_question_count;
+  //     console.log("Cat:", catId, "Easy:", easyQuestionCount, "Medium:", mediumQuestionCount, "Hard:", hardQuestionCount);
+  //     return (easyQuestionCount, mediumQuestionCount, hardQuestionCount)
+  //   });
+  // }
 
   constructor(props){
     super(props)
@@ -88,6 +69,8 @@ class GameContainer extends Component {
 
       playerName: null,
 
+      difficulties: ["easy", "medium", "hard"],
+
       categoryIndices: [
         {index: 0,  name: "General Knowledge"},
         {index: 1,  name: "Mythology"},
@@ -96,306 +79,41 @@ class GameContainer extends Component {
         {index: 4,  name: "History"},
         {index: 5,  name: "Animals"},
         {index: 6,  name: "Politics"},
-        {index: 7,  name: "Art"}
       ],
 
       allCategories: [
-        {id: 9,   name: "General Knowledge",  state: 1},
-        {id: 20,  name: "Mythology",          state: 1},
-        {id: 21,  name: "Sports",             state: 1},
-        {id: 22,  name: "Geography",          state: 1},
-        {id: 23,  name: "History",            state: 1},
-        {id: 27,  name: "Animals",            state: 1},
-        {id: 24,  name: "Politics",           state: 1},
-        {id: 25,  name: "Art",                state: 1}
+        {id: 9, name: "General Knowledge", state: 1},
+        {id: 17, name: "Science & Nature", state: 1},
+        {id: 20, name: "Mythology", state: 1},
+        {id: 21, name: "Sports", state: 1},
+        {id: 22, name: "Geography", state: 1},
+        {id: 23, name: "History", state: 1},
+        {id: 24, name: "Politics", state: 1},
+        {id: 27, name: "Animals", state: 1}
       ],         // Hard coded until we have API data
       allCategories2: [
-        {id: 9,   name: "General Knowledge",  state: 1},
-        {id: 20,  name: "Mythology",          state: 1},
-        {id: 21,  name: "Sports",             state: 1},
-        {id: 22,  name: "Geography",          state: 1},
-        {id: 23,  name: "History",            state: 1},
-        {id: 27,  name: "Animals",            state: 1},
-        {id: 24,  name: "Politics",           state: 1},
-        {id: 25,  name: "Art",                state: 1}
+        {id: 9, name: "General Knowledge", state: 1},
+        {id: 17, name: "Science & Nature", state: 1},
+        {id: 20, name: "Mythology", state: 1},
+        {id: 21, name: "Sports", state: 1},
+        {id: 22, name: "Geography", state: 1},
+        {id: 23, name: "History", state: 1},
+        {id: 24, name: "Politics", state: 1},
+        {id: 27, name: "Animals", state: 1}
       ],         // Hard coded until we have API data
 
       playerCategories: [
-        {id: 9,   name: "General Knowledge",  state: 1},
-        {id: 20,  name: "Mythology",          state: 1},
-        {id: 21,  name: "Sports",             state: 1},
-        {id: 22,  name: "Geography",          state: 1},
-        {id: 23,  name: "History",            state: 1},
-        {id: 27,  name: "Animals",            state: 1},
-        {id: 24,  name: "Politics",           state: 1},
-        {id: 25,  name: "Art",                state: 1}
+        {id: 9, name: "General Knowledge", state: 1},
+        {id: 17, name: "Science & Nature", state: 1},
+        {id: 20, name: "Mythology", state: 1},
+        {id: 21, name: "Sports", state: 1},
+        {id: 22, name: "Geography", state: 1},
+        {id: 23, name: "History", state: 1},
+        {id: 24, name: "Politics", state: 1},
+        {id: 27, name: "Animals", state: 1}
       ],      // Hard coded until we have API data
 
-      questions: [[[{
-        "category": "General Knowledge",
-        "type": "multiple",
-        "difficulty": "easy",
-        "question": "Easy Gen Knowledge",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "General Knowledge",
-        "type": "multiple",
-        "difficulty": "medium",
-        "question": "Medium Gen Knowledge",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "General Knowledge",
-        "type": "multiple",
-        "difficulty": "hard",
-        "question": "Hard Gen Knowledge",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }]],[[{
-        "category": "Mythology",
-        "type": "multiple",
-        "difficulty": "easy",
-        "question": "Easy Mythology",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "Mythology",
-        "type": "multiple",
-        "difficulty": "medium",
-        "question": "Medium Mythology",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "Mythology",
-        "type": "multiple",
-        "difficulty": "hard",
-        "question": "Hard Mythology",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }]],[[{
-        "category": "Sports",
-        "type": "multiple",
-        "difficulty": "easy",
-        "question": "Easy Sports",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "Sports",
-        "type": "multiple",
-        "difficulty": "medium",
-        "question": "Medium Sports",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "Sports",
-        "type": "multiple",
-        "difficulty": "hard",
-        "question": "Hard Sports",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }]],[[{
-        "category": "Geography",
-        "type": "multiple",
-        "difficulty": "easy",
-        "question": "Easy Geography",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "Geography",
-        "type": "multiple",
-        "difficulty": "medium",
-        "question": "Medium Geography",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "Geography",
-        "type": "multiple",
-        "difficulty": "hard",
-        "question": "Hard Geography",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }]],[[{
-        "category": "History",
-        "type": "multiple",
-        "difficulty": "easy",
-        "question": "Easy History",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "History",
-        "type": "multiple",
-        "difficulty": "medium",
-        "question": "Medium History",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "History",
-        "type": "multiple",
-        "difficulty": "hard",
-        "question": "Hard History",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }]],[[{
-        "category": "Animals",
-        "type": "multiple",
-        "difficulty": "easy",
-        "question": "Easy Animals",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "Animals",
-        "type": "multiple",
-        "difficulty": "medium",
-        "question": "Medium Animals",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "Animals",
-        "type": "multiple",
-        "difficulty": "hard",
-        "question": "Hard Animals",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }]],[[{
-        "category": "Politics",
-        "type": "multiple",
-        "difficulty": "easy",
-        "question": "Easy Politics",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "Politics",
-        "type": "multiple",
-        "difficulty": "medium",
-        "question": "Medium Politics",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "Politics",
-        "type": "multiple",
-        "difficulty": "hard",
-        "question": "Hard Politics",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }]],[[{
-        "category": "Art",
-        "type": "multiple",
-        "difficulty": "easy",
-        "question": "Easy Art",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "Art",
-        "type": "multiple",
-        "difficulty": "medium",
-        "question": "Medium Art",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }],[{
-        "category": "Art",
-        "type": "multiple",
-        "difficulty": "hard",
-        "question": "Hard Art",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      }]]],
+      questions: [],
 
       currentCategory: {id: 0,   name: "To be selected...",  state: 1}, // default - might want to change this later
 
