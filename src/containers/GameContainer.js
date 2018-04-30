@@ -146,7 +146,8 @@ class GameContainer extends Component {
         ]
       },      // Hard coded until we have API data
 
-      currentDifficulty: "easy"
+      currentDifficulty: "easy",
+      currentDifficultyValue: "1"
     }
     this.handleMove = this.handleMove.bind(this);
     this.handlePlayerNameKeyUp = this.handlePlayerNameKeyUp.bind(this);
@@ -257,13 +258,21 @@ class GameContainer extends Component {
     if((this.state.currentCell + 1) === 5) {
       this.setState({
         currentDifficulty: "medium",
+        currentDifficultyValue: 2,
         playerCategories: this.state.allCategories1,
       });
     }
     else if ((this.state.currentCell + 1) === 10) {
       this.setState({
         currentDifficulty: "hard",
+        currentDifficultyValue: 3,
         playerCategories: this.state.allCategories2,
+      });
+    }
+    else if ((this.state.currentCell + 1) === 15) {
+      this.setState({
+        currentDifficultyValue: 4,
+        playerCategories: this.state.allCategories3,
       });
     }
   }
