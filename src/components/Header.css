@@ -22,3 +22,12 @@
   top: 10px;
   right: 10px;
 }
+
+.chart-status {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: black;
+  position: fixed;
+  top: 0;
+  right: 120px;
+}
