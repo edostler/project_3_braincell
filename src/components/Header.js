@@ -6,11 +6,13 @@ const Header = (props) =>{
   //   return "Welcome to BrainCell!!"
   // }
   return (
-      <div>
+      <React.Fragment>
         {/* <h1>Hello {props.playerName} welcome to BrainCell!</h1> */}
         {/* <p>You have earned {props.currentPoints} points, well done!!</p> */}
-        <h1>Hello, welcome to BrainCell!</h1>
-      </div>
+        <h1 className="header-title">Hello, welcome to BrainCell!</h1>
+        <img className="header-logo" src="BrainCell_Framed.png" alt=""/>
+        <img className="chart-icon" src="chart-icon.png" alt=""/>
+      </React.Fragment>
     );
   };
 
