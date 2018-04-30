@@ -35,6 +35,8 @@ const MiddleContainer = (props) => {
               playerName={props.playerName}
               playerCategories={props.playerCategories}
               handleCategorySelect={props.handleCategorySelect}
+              handleCategoryRandomise={props.handleCategoryRandomise}
+              currentDifficultyValue={props.currentDifficultyValue}
             />
           </div>
         </React.Fragment>
