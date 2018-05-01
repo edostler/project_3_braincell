@@ -315,7 +315,7 @@ class GameContainer extends Component {
   removeExhaustedHardCategories(){
     let remainingHardCategories = this.state.allCategories;
     let categoryIndex = 0;
-    let flagArray = [0,0,0,0,0,0,0,0];
+    let flagArray = [0,0,0,0,0,0,0,0,0];
     this.state.questions.forEach(function(categoryGroup) {
       let hardDifficultyIndex = null;
       let index = 0;
@@ -374,10 +374,6 @@ class GameContainer extends Component {
     return (
       <React.Fragment>
         <div className="game-container">
-          <p>I'm a Game Container</p>
-          <p>Game Status: {this.state.gameStatus}</p>
-          <p>Player Name: {this.state.playerName}</p>
-          <p>Selected Category: {this.state.currentCategory.name}</p>
           <CellContainer
             currentCell={this.state.currentCell}
           />
