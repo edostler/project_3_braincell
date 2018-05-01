@@ -8,7 +8,7 @@ const Header = (props) => {
         <h1 className="header-title">Welcome to BrainCell!</h1>
         <img
           className="header-logo"
-          src="BrainCell_Framed.png"
+          src="logo.png"
           alt=""
         />
         <p className="chart-status">Show Chart Status: {props.showChart}</p>

@@ -385,6 +385,7 @@ class GameContainer extends Component {
           <CellContainer
             currentCell={this.state.currentCell}
             cellImages={this.state.cellImages}
+            gameStatus={this.state.gameStatus}
           />
           <MiddleContainer
             gameStatus={this.state.gameStatus}
