@@ -236,10 +236,10 @@ class GameContainer extends Component {
   handleResult(result) {
     if(result) {
       console.log("Correct!");
-      // const thisCell = this.state.currentCell;
+      const thisCell = this.state.currentCell;
       const nextCell = this.state.currentCell + 1;
       let currentCellImages = this.state.cellImages;
-      currentCellImages[nextCell - 1] = "complete";
+      currentCellImages[thisCell] = "complete";
       this.setState({
         cellImages: currentCellImages,
         currentCell: nextCell,
