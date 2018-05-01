@@ -1,11 +1,22 @@
 .question {
   width: 54vw;
   max-width: 54vh;
-  height: 20vw;
-  max-height: 20vh;
+  height: 22vw;
+  max-height: 22vh;
   font-size: 0.8rem;
+  overflow: hidden;
 }
 
 .current-question {
-  margin: 0;
+  height: 80%;
+  width: 90%;
+  margin: 5%;
+  text-align: center;
+  background-color: #4F247C;
+  color: white;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-wrap: break-word;
 }

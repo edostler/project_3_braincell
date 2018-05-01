@@ -1,7 +1,15 @@
 .answer-container {
   width: 54vw;
   max-width: 54vh;
-  height: 33.3vw;
-  max-height: 33.3vh;
-  font-size: 0.8rem
+  height: 28.3vw;
+  max-height: 28.3vh;
+  font-size: 0.8rem;
+  overflow: hidden;
+}
+
+.answer-block {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
 }

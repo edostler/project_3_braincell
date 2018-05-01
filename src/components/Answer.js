@@ -5,9 +5,7 @@ const Answer = (props) => {
 
   return (
       <div id={props.answerIndex} onClick={() => {props.handleAnswer(props.answer)}} className="answer">
-        <p className="answer-text">
-          {props.answer}
-        </p>
+        {props.answer}
       </div>
   )
 
