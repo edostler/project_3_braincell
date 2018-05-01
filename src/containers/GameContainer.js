@@ -8,7 +8,7 @@ class GameContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      categoryIndices: [],
+      // categoryIndices: [],
       questions: [],
       playerName: null,
       currentCell: 0,
@@ -25,6 +25,7 @@ class GameContainer extends Component {
         {id: 22, name: "Geography", state: 1},
         {id: 23, name: "History", state: 1},
         {id: 24, name: "Politics", state: 1},
+        {id: 25, name: "Art", state: 1},
         {id: 27, name: "Animals", state: 1}
       ],
 
@@ -36,6 +37,7 @@ class GameContainer extends Component {
         {id: 22, name: "Geography", state: 1},
         {id: 23, name: "History", state: 1},
         {id: 24, name: "Politics", state: 1},
+        {id: 25, name: "Art", state: 1},
         {id: 27, name: "Animals", state: 1}
       ],
 
@@ -72,7 +74,7 @@ class GameContainer extends Component {
     let defaultQuestionCount = 20;
     this.state.allCategories.map((category, index) => {
       if (this.state.allCategories[index].state === 1){
-        this.state.categoryIndices.push({index: index, name: category.name})
+        // this.state.categoryIndices.push({index: index, name: category.name})
         let allCategoryQuestions = [];
 
         this.getQuestionCount(category.id).then(qCount => {
