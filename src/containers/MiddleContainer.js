@@ -29,7 +29,6 @@ const MiddleContainer = (props) => {
       return (
         <React.Fragment>
           <div className="middle-container">
-            {/* <p>I'm a Middle Container</p> */}
             <Category
               playerName={props.playerName}
               playerCategories={props.playerCategories}
@@ -45,7 +44,6 @@ const MiddleContainer = (props) => {
       return (
         <React.Fragment>
           <div className="middle-container">
-            {/* <p>I'm a Middle Container</p> */}
             <QuizContainer
               playerName={props.playerName}
               currentQuestion={props.currentQuestion}
@@ -59,7 +57,6 @@ const MiddleContainer = (props) => {
       return (
         <React.Fragment>
           <div className="middle-container">
-            {/* <p>I'm a Middle Container</p> */}
             <End
               playerName={props.playerName}
               currentPoints={props.currentPoints}
