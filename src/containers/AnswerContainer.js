@@ -36,26 +36,30 @@ class AnswerContainer extends Component {
     return (
       <React.Fragment>
         <div className="answer-container">
-          <Answer
-            answerIndex="one"
-            answer={this.state.randomAnswers[0]}
-            handleAnswer={this.handleAnswer}
-          />
-          <Answer
-            answerIndex="two"
-            answer={this.state.randomAnswers[1]}
-            handleAnswer={this.handleAnswer}
-          />
-          <Answer
-            answerIndex="three"
-            answer={this.state.randomAnswers[2]}
-            handleAnswer={this.handleAnswer}
-          />
-          <Answer
-            answerIndex="four"
-            answer={this.state.randomAnswers[3]}
-            handleAnswer={this.handleAnswer}
-          />
+          <div className="answerBlock">
+            <Answer
+              answerIndex="one"
+              answer={this.state.randomAnswers[0]}
+              handleAnswer={this.handleAnswer}
+            />
+            <Answer
+              answerIndex="two"
+              answer={this.state.randomAnswers[1]}
+              handleAnswer={this.handleAnswer}
+            />
+          </div>
+          <div className="answerBlock">
+            <Answer
+              answerIndex="three"
+              answer={this.state.randomAnswers[2]}
+              handleAnswer={this.handleAnswer}
+            />
+            <Answer
+              answerIndex="four"
+              answer={this.state.randomAnswers[3]}
+              handleAnswer={this.handleAnswer}
+            />
+          </div>
         </div>
       </React.Fragment>
     )
