@@ -33,7 +33,6 @@ class GameContainer extends Component {
       currentDifficulty: "easy",
       currentDifficultyValue: "1"
     }
-    this.handleMove = this.handleMove.bind(this);
     this.handlePlayerNameKeyUp = this.handlePlayerNameKeyUp.bind(this);
     this.handlePlayerNameSubmit = this.handlePlayerNameSubmit.bind(this);
     this.handleCategorySelect = this.handleCategorySelect.bind(this);
@@ -48,7 +47,6 @@ class GameContainer extends Component {
     let defaultQuestionCount = 20;
     this.state.allCategories.map((category, index) => {
       if (this.state.allCategories[index].state === 1){
-        // this.state.categoryIndices.push({index: index, name: category.name})
         let allCategoryQuestions = [];
 
         this.getQuestionCount(category.id).then(qCount => {
@@ -116,10 +114,6 @@ class GameContainer extends Component {
     questionCountArray.push(questionCount[0].total_medium_question_count);
     questionCountArray.push(questionCount[0].total_hard_question_count);
     return questionCountArray;
-  }
-
-  handleMove(){
-
   }
 
   // This callback is activated from Start.js,
