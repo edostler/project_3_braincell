@@ -3,6 +3,14 @@ import './GameContainer.css';
 import CellContainer from './CellContainer';
 import MiddleContainer from './MiddleContainer';
 
+const Request = require('../services/requests.js');
+const requestPlayers = new Request('http://localhost:3001/players');
+
+// This callback is activated once the POST is complete:
+const createRequestComplete = function(response){
+  console.log(response);
+}
+
 class GameContainer extends Component {
 
   constructor(props){
@@ -13,6 +21,10 @@ class GameContainer extends Component {
       playerName: null,
       currentCell: 0,
       currentPoints: 0,
+      playerResults: {
+        name: "TEMP NAME",
+        result: 100
+      },
       // gameStatus: 0 = Start, 1 = Choose Category, 2 = In Play, 3 = End
       gameStatus: 0,
       difficulties: ["easy", "medium", "hard"],
@@ -342,8 +354,12 @@ class GameContainer extends Component {
     }
   }
 
+  // On clicking an icon in the End.js component:
+  // Post the playerResults object to the Mongo database
+  // So that it is available for generating stats/charts/leader-board
   handleEndClick() {
     console.log("We have clicked on End!");
+    requestPlayers.post(createRequestComplete, this.state.playerResults);
     this.setState({
       gameStatus: 0
     });
