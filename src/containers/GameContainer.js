@@ -22,7 +22,7 @@ class GameContainer extends Component {
       currentCell: 0,
       currentPoints: 0,
       playerResults: {
-        name: "TEMP NAME",
+        name: "UNKNOWN",
         result: 100
       },
       // gameStatus: 0 = Start, 1 = Choose Category, 2 = In Play, 3 = End
@@ -275,7 +275,7 @@ class GameContainer extends Component {
         }
       }
       else {
-        console.log("Conglatulations!");
+        console.log("Congratulations!");
         this.setState({
           gameStatus: 3
         });
@@ -295,6 +295,13 @@ class GameContainer extends Component {
         });
       }
     }
+    // Update the object of results for the current player:
+    this.setState({
+      playerResults: {
+        name: this.state.playerName,
+        result: this.state.currentPoints
+      }
+    });
   }
 
   removeCategory(){
@@ -368,11 +375,7 @@ class GameContainer extends Component {
   // Post the playerResults object to the Mongo database
   // So that it is available for generating stats/charts/leader-board
   handleEndClick() {
-    console.log("We have clicked on End!");
     requestPlayers.post(createRequestComplete, this.state.playerResults);
-    this.setState({
-      gameStatus: 0
-    });
   }
 
   render(){
