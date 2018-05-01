@@ -1,15 +1,6 @@
 .quiz-container {
-  margin: 0 auto;
-
-  width: 53vw;
-  max-width: 53vh;
-  height: 45vw;
-  max-height: 45vh;
-  font-size: 0.8rem;
-  color: black;
-  background-color: lightyellow;
-  position: fixed;
-  left: 0;
-  right: 0;
-  overflow: auto;
+  width: 54vw;
+  max-width: 54vh;
+  height: 53.3vw;
+  max-height: 53.3vh;
 }

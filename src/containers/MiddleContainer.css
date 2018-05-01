@@ -1,41 +1,16 @@
 .middle-container {
   margin: 0 auto;
-  margin-top: 5%;
-
-  width: 53vw;
-  max-width: 53vh;
-  height: 45vw;
-  max-height: 45vh;
-  /* font-size: 0.8rem; */
-  border-width: thin;
-  border-style: solid;
-  /* background-color: lightgreen;
-  color: black;
-
-  position: fixed;
-  left: 0;
-  right: 0;
-  overflow: auto; */
+  margin-top: 106px;
+  width: 54vw;
+  max-width: 54vh;
+  height: 53.3vw;
+  max-height: 53.3vh;
+  box-shadow: 5px 5px 5px grey;
+  background-color: #D5DAF2;
 }
 
-@media all and (max-width: 850px) {
+@media all and (max-width: 700px) {
   .middle-container {
-    margin: 0 auto;
-    margin-top: 15%;
-
-    width: 53vw;
-    max-width: 53vh;
-    height: 45vw;
-    max-height: 45vh;
-    /* font-size: 0.8rem; */
-    border-width: thin;
-    border-style: solid;
-    /* background-color: lightgreen;
-    color: black;
-
-    position: fixed;
-    left: 0;
-    right: 0;
-    overflow: auto; */
+    margin-top: 16%;
   }
 }

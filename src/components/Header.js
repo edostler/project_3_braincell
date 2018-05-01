@@ -2,13 +2,9 @@ import React from 'react';
 import './Header.css';
 
 const Header = (props) => {
-  // if (!props.playerName){
-  //   return "Welcome to BrainCell!!"
-  // }
+
   return (
-      <article className="header">
-        {/* <h1>Hello {props.playerName} welcome to BrainCell!</h1> */}
-        {/* <p>You have earned {props.currentPoints} points, well done!!</p> */}
+      <div className="header">
         <h1 className="header-title">Welcome to BrainCell!</h1>
         <img
           className="header-logo"
@@ -22,7 +18,7 @@ const Header = (props) => {
           alt=""
           onClick={props.handleChartClick}
         />
-      </article>
+      </div>
     );
   };
 
