@@ -4,78 +4,6 @@ import CellContainer from './CellContainer';
 import MiddleContainer from './MiddleContainer';
 
 class GameContainer extends Component {
-  async componentDidMount(){
-    let defaultQuestionCount = 20;
-    this.state.allCategories.map((category, index) => {
-      if (this.state.allCategories[index].state === 1){
-        this.state.categoryIndices.push({index: index, name: category.name})
-        let allCategoryQuestions = [];
-
-        this.getQuestionCount(category.id).then(qCount => {
-          this.state.difficulties.map(difficulty => {
-            let questionCount = 0
-            switch(difficulty){
-              case "easy":
-              questionCount = qCount[0];
-              break;
-              case "medium":
-              questionCount = qCount[1];
-              break;
-              case "hard":
-              questionCount = qCount[2];
-              break;
-              default:
-              questionCount = defaultQuestionCount
-            }
-
-            if (questionCount < defaultQuestionCount){
-              defaultQuestionCount = questionCount;
-            }
-            
-            let url = "https://opentdb.com/api.php?amount=" +
-              defaultQuestionCount +
-            "&category=" +
-            this.state.allCategories[index].id +
-            "&difficulty=" +
-            difficulty;
-            fetch(url)
-            .then(response => response.json())
-            .then((json) => {
-              let allQuestionsByDifficulty = [];
-              let questionsByDifficulty = (json.results)
-              questionsByDifficulty.map(questionBD => {
-                if (questionBD.type === "multiple"){
-                  allQuestionsByDifficulty.push(questionBD)
-                }
-                return null;
-              })
-              allCategoryQuestions.push(allQuestionsByDifficulty)
-            })
-            return null;
-          })
-        });
-        let prevQuestionsArray = this.state.questions;
-        prevQuestionsArray.push(allCategoryQuestions);
-        this.setState({questions: prevQuestionsArray});
-      }
-      return null;
-    })
-  }
-
-  async getQuestionCount(catId){
-    let questionCount = [];
-    let questionCountArray = [];
-    let questionCountUrl = "https://opentdb.com/api_count.php?category=" +
-      catId;
-    let response = await fetch (questionCountUrl)
-    let json = await response.json()
-
-    questionCount.push(json.category_question_count)
-    questionCountArray.push(questionCount[0].total_easy_question_count);
-    questionCountArray.push(questionCount[0].total_medium_question_count);
-    questionCountArray.push(questionCount[0].total_hard_question_count);
-    return questionCountArray;
-  }
 
   constructor(props){
     super(props)
@@ -138,6 +66,79 @@ class GameContainer extends Component {
     this.checkIncrementDiffculty = this.checkIncrementDiffculty.bind(this);
     this.removeCategory = this.removeCategory.bind(this);
     this.sampleQuestion = this.sampleQuestion.bind(this);
+  }
+
+  async componentDidMount(){
+    let defaultQuestionCount = 20;
+    this.state.allCategories.map((category, index) => {
+      if (this.state.allCategories[index].state === 1){
+        this.state.categoryIndices.push({index: index, name: category.name})
+        let allCategoryQuestions = [];
+
+        this.getQuestionCount(category.id).then(qCount => {
+          this.state.difficulties.map(difficulty => {
+            let questionCount = 0
+            switch(difficulty){
+              case "easy":
+              questionCount = qCount[0];
+              break;
+              case "medium":
+              questionCount = qCount[1];
+              break;
+              case "hard":
+              questionCount = qCount[2];
+              break;
+              default:
+              questionCount = defaultQuestionCount
+            }
+
+            if (questionCount < defaultQuestionCount){
+              defaultQuestionCount = questionCount;
+            }
+
+            let url = "https://opentdb.com/api.php?amount=" +
+              defaultQuestionCount +
+            "&category=" +
+            this.state.allCategories[index].id +
+            "&difficulty=" +
+            difficulty;
+            fetch(url)
+            .then(response => response.json())
+            .then((json) => {
+              let allQuestionsByDifficulty = [];
+              let questionsByDifficulty = (json.results)
+              questionsByDifficulty.map(questionBD => {
+                if (questionBD.type === "multiple"){
+                  allQuestionsByDifficulty.push(questionBD)
+                }
+                return null;
+              })
+              allCategoryQuestions.push(allQuestionsByDifficulty)
+            })
+            return null;
+          })
+        });
+        let prevQuestionsArray = this.state.questions;
+        prevQuestionsArray.push(allCategoryQuestions);
+        this.setState({questions: prevQuestionsArray});
+      }
+      return null;
+    })
+  }
+
+  async getQuestionCount(catId){
+    let questionCount = [];
+    let questionCountArray = [];
+    let questionCountUrl = "https://opentdb.com/api_count.php?category=" +
+      catId;
+    let response = await fetch (questionCountUrl)
+    let json = await response.json()
+
+    questionCount.push(json.category_question_count)
+    questionCountArray.push(questionCount[0].total_easy_question_count);
+    questionCountArray.push(questionCount[0].total_medium_question_count);
+    questionCountArray.push(questionCount[0].total_hard_question_count);
+    return questionCountArray;
   }
 
   handleMove(){
