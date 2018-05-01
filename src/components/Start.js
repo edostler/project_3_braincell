@@ -6,7 +6,6 @@ const Start = (props) => {
   return (
     <div className="start">
       <form onSubmit={props.handlePlayerNameSubmit}>
-        <p>I'm a Start</p>
         <input
           type="text"
           onKeyUp={props.handlePlayerNameKeyUp}

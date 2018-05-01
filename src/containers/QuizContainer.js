@@ -8,7 +8,6 @@ const QuizContainer = (props) => {
     return (
       <React.Fragment>
         <div className="quiz-container">
-          <p>I'm a Quiz Container</p>
           <Question
             currentQuestion={props.currentQuestion}/>
           <AnswerContainer

@@ -36,7 +36,6 @@ class AnswerContainer extends Component {
     return (
       <React.Fragment>
         <div className="answer-container">
-          <p>I'm an Answer Container</p>
           <Answer
             answerIndex="one"
             answer={this.state.randomAnswers[0]}

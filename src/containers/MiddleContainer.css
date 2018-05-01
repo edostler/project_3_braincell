@@ -1,17 +1,19 @@
 .middle-container {
   margin: 0 auto;
+  margin-top: 5%;
 
   width: 53vw;
   max-width: 53vh;
   height: 45vw;
   max-height: 45vh;
-  font-size: 0.8rem;
+  /* font-size: 0.8rem; */
+  border-width: thin;
   border-style: solid;
-  background-color: lightgreen;
+  /* background-color: lightgreen;
   color: black;
 
   position: fixed;
   left: 0;
   right: 0;
-  overflow: auto;
+  overflow: auto; */
 }

@@ -1,11 +1,18 @@
 .answer {
+  margin: 3px;
   display: inline-block;
   border-style: solid;
-  background-color: lavender;
   width: 12vw;
   max-width: 12vh;
-  height: 15vw;
-  max-height: 15vh;
+  height: 10vw;
+  max-height: 10vh;
+  text-align: center;
+}
+
+.answer-text {
+  height: auto;
+  margin: 0;
+  padding: 10px 5px;
 }
 
 #one {
