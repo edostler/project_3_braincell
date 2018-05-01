@@ -1,33 +1,28 @@
 .answer {
-  margin: 5px;
-  display: inline-block;
-  width: 12vw;
-  max-width: 12vh;
-  height: 10vw;
-  max-height: 10vh;
-  text-align: center;
+  margin: 2%;
+  padding: 1%;
+  width: 46%;
+  max-width: 46%;
+  height: 80%;
+  max-height: 80%;
   overflow: hidden;
+  text-align: center;
   box-shadow: 5px 5px 5px grey;
+  background-color: #FF9000;
+  color: white;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-wrap: break-word;
 }
 
-.answer-text {
-  height: auto;
-  margin: 0;
-  padding: 10px 5px;
+.answer:hover {
+  background-color: #C97200
 }
 
-#one {
-  background: limegreen;
-}
-
-#two {
-  background: dodgerblue;
-}
-
-#three {
-  background: red;
-}
-
-#four {
-  background: yellow;
+.answer:active {
+  background-color: #C97200;
+  box-shadow: none;
+  transform: translateY(4px);
 }

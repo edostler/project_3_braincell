@@ -12,12 +12,15 @@ const Category = (props) => {
     return (
       <React.Fragment>
         <div className="category">
-          <p>Number of categories to choose from: {props.playerCategories.length}</p>
+          <p className="category-text">What's your favourite category?</p>
           <select
+            className="category-select"
             onChange={props.handleCategorySelect}
             id="category-selector"
             defaultValue="default">
-            <option disabled value="default">Choose a category...</option>
+            <option
+              className="category-option"
+              disabled value="default">Choose a category...</option>
             {options}
           </select>
         </div>
@@ -30,7 +33,6 @@ const Category = (props) => {
       <h1>.</h1>
     )
   }
-
 
 }
 

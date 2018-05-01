@@ -5,13 +5,14 @@ const Start = (props) => {
 
   return (
     <div className="start">
-      <form onSubmit={props.handlePlayerNameSubmit}>
+      <form className="submit-name-form" onSubmit={props.handlePlayerNameSubmit}>
         <input
+          className="name-input"
           type="text"
           onKeyUp={props.handlePlayerNameKeyUp}
           placeholder="Enter your name"
         />
-        <input type="submit" name="submit" value="Start Game" />
+        <input className="submit-input" type="submit" name="submit" value="Let's Play!" />
       </form>
     </div>
   )
