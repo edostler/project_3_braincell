@@ -8,13 +8,13 @@ class GameContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      categoryIndices: [],
       questions: [],
+      currentQuestion: {},
       playerName: null,
       currentCell: 0,
       currentPoints: 0,
-      gameStatus: 0,
       // gameStatus: 0 = Start, 1 = Choose Category, 2 = In Play, 3 = End
+      gameStatus: 0,
       difficulties: ["easy", "medium", "hard"],
 
       allCategories: [
@@ -25,39 +25,14 @@ class GameContainer extends Component {
         {id: 22, name: "Geography", state: 1},
         {id: 23, name: "History", state: 1},
         {id: 24, name: "Politics", state: 1},
+        {id: 25, name: "Art", state: 1},
         {id: 27, name: "Animals", state: 1}
       ],
 
-      playerCategories: [
-        {id: 9, name: "General Knowledge", state: 1},
-        {id: 17, name: "Science & Nature", state: 1},
-        {id: 20, name: "Mythology", state: 1},
-        {id: 21, name: "Sports", state: 1},
-        {id: 22, name: "Geography", state: 1},
-        {id: 23, name: "History", state: 1},
-        {id: 24, name: "Politics", state: 1},
-        {id: 27, name: "Animals", state: 1}
-      ],
-
-      currentCategory: {id: 0,   name: "To be selected...",  state: 1}, // default - might want to change this later
-
-      currentQuestion: {
-        "category": "",
-        "type": "",
-        "difficulty": "",
-        "question": "What's the colour of the sky?",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      },      // Hard coded until we have API data
-
+      currentCategory: {id: 0, name: "To be selected...", state: 1},
       currentDifficulty: "easy",
       currentDifficultyValue: "1"
     }
-    this.handleMove = this.handleMove.bind(this);
     this.handlePlayerNameKeyUp = this.handlePlayerNameKeyUp.bind(this);
     this.handlePlayerNameSubmit = this.handlePlayerNameSubmit.bind(this);
     this.handleCategorySelect = this.handleCategorySelect.bind(this);
@@ -72,7 +47,6 @@ class GameContainer extends Component {
     let defaultQuestionCount = 20;
     this.state.allCategories.map((category, index) => {
       if (this.state.allCategories[index].state === 1){
-        this.state.categoryIndices.push({index: index, name: category.name})
         let allCategoryQuestions = [];
 
         this.getQuestionCount(category.id).then(qCount => {
@@ -124,6 +98,7 @@ class GameContainer extends Component {
       }
       return null;
     })
+    this.setState({playerCategories: this.state.allCategories})
   }
 
   async getQuestionCount(catId){
@@ -139,10 +114,6 @@ class GameContainer extends Component {
     questionCountArray.push(questionCount[0].total_medium_question_count);
     questionCountArray.push(questionCount[0].total_hard_question_count);
     return questionCountArray;
-  }
-
-  handleMove(){
-
   }
 
   // This callback is activated from Start.js,
