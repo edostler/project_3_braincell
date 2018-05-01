@@ -21,6 +21,24 @@ MongoClient.connect("mongodb://localhost:27017", function(err, client){
     return;
   }
 
+  //get the client db connection:
+  const db = client.db("braincell_db");
+
+  // app is our express server:
+  app.get("/players", function(req, res){
+    const playerCollection = db.collection("players");
+    // takes an anon function that converts all players objects to array & returns err status and coffees:
+    playerCollection.find().toArray(function(err, players){
+      if(err){
+        console.log(err);
+        res.status(500);
+        res.send();
+      }
+
+      res.json(players);
+    });
+  });
+
   app.listen(3001, function(){
     console.log("Listening for requests on port 3001!");
   })
