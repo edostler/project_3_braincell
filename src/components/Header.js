@@ -6,7 +6,7 @@ const Header = (props) => {
   //   return "Welcome to BrainCell!!"
   // }
   return (
-      <React.Fragment>
+      <article className="header">
         {/* <h1>Hello {props.playerName} welcome to BrainCell!</h1> */}
         {/* <p>You have earned {props.currentPoints} points, well done!!</p> */}
         <h1 className="header-title">Welcome to BrainCell!</h1>
@@ -22,7 +22,7 @@ const Header = (props) => {
           alt=""
           onClick={props.handleChartClick}
         />
-      </React.Fragment>
+      </article>
     );
   };
 
