@@ -3,20 +3,14 @@ import './Cell.css';
 
 const Cell = (props) => {
 
-  if(parseInt(props.position, 10) === props.currentCell) {
-    return (
-      <article id={props.difficulty} className="box">
-        <div className="inner">X</div>
-      </article>
-    )
-  }
-  else {
-    return (
-      <article id={props.difficulty} className="box">
-        <div className="inner">Cell {props.position}</div>
-      </article>
-    )
-  }
+  return (
+    <article id={props.difficulty} className="box">
+      <div id="inner" className={props.cellImages[parseInt(props.position - 1, 10)]}>
+        <figure className="unanswered">Cell {props.position}</figure>
+        <figure className="answered">Cell {props.position}</figure>
+      </div>
+    </article>
+  )
 
 }
 

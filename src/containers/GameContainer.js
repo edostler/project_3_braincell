@@ -43,7 +43,13 @@ class GameContainer extends Component {
 
       currentCategory: {id: 0, name: "To be selected...", state: 1},
       currentDifficulty: "easy",
-      currentDifficultyValue: "1"
+      currentDifficultyValue: "1",
+      cellImages: [
+        "easy", "easy", "easy", "easy", "easy",
+        "medium", "medium", "medium", "medium", "medium",
+        "hard", "hard", "hard", "hard", "hard",
+        "mix", "mix", "mix", "mix", "mix"
+      ]
     }
     this.handlePlayerNameKeyUp = this.handlePlayerNameKeyUp.bind(this);
     this.handlePlayerNameSubmit = this.handlePlayerNameSubmit.bind(this);
@@ -242,10 +248,14 @@ class GameContainer extends Component {
   handleResult(result) {
     if(result) {
       console.log("Correct!");
-      const nextCell = this.state.currentCell + 1
+      const thisCell = this.state.currentCell;
+      const nextCell = this.state.currentCell + 1;
+      let currentCellImages = this.state.cellImages;
+      currentCellImages[thisCell] = "complete";
       this.setState({
+        cellImages: currentCellImages,
         currentCell: nextCell,
-        currentPoints: this.state.currentPoints + 1,
+        currentPoints: this.state.currentPoints + 1
       });
       if(this.state.currentDifficultyValue < 4) {
         this.removeCategory();
@@ -371,6 +381,7 @@ class GameContainer extends Component {
         <div className="game-container">
           <CellContainer
             currentCell={this.state.currentCell}
+            cellImages={this.state.cellImages}
           />
           <MiddleContainer
             gameStatus={this.state.gameStatus}
