@@ -64,7 +64,3 @@
 #inner.complete {
   transform: rotateY( 180deg );
 }
-
-#current {
-  background: #yellow;
-}
