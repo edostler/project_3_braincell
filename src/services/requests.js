@@ -26,7 +26,6 @@ Request.prototype.post = function (callback, body) {
       return;
     }
 
-    debugger;
     const responseBody = JSON.parse(this.responseText);
     callback(responseBody);
   });
