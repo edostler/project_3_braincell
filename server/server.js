@@ -39,6 +39,23 @@ MongoClient.connect("mongodb://localhost:27017", function(err, client){
     });
   });
 
+  app.post("/players", function(req, res) {
+    const playerCollection = db.collection("players");
+    let playerToSave = req.body;
+    playerToSave.timestamp = new Date();
+    console.log("playerToSave", playerToSave);
+    playerCollection.save(playerToSave, function(err, result) {
+      if(err) {
+        console.log(err);
+        res.status(500);
+        res.send();
+      }
+      console.log("Saved player to database!");
+      res.status(201);
+      res.json(playerToSave);
+    });
+  });
+
   app.listen(3001, function(){
     console.log("Listening for requests on port 3001!");
   })
