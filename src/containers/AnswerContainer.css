@@ -1,15 +1,7 @@
 .answer-container {
-  margin: 0 auto;
-
-  width: 53vw;
-  max-width: 53vh;
-  height: 25vw;
-  max-height: 25vh;
-  font-size: 0.8rem;
-  color: black;
-  background-color: lightyellow;
-  position: absolute;
-  top: 10;
-  bottom: 0;
-  overflow: auto;
+  width: 54vw;
+  max-width: 54vh;
+  height: 33.3vw;
+  max-height: 33.3vh;
+  font-size: 0.8rem
 }

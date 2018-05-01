@@ -1,13 +1,13 @@
 .answer {
-  margin: 1.5px;
+  margin: 5px;
   display: inline-block;
-  border-style: solid;
   width: 12vw;
   max-width: 12vh;
   height: 10vw;
   max-height: 10vh;
   text-align: center;
   overflow: hidden;
+  box-shadow: 5px 5px 5px grey;
 }
 
 .answer-text {

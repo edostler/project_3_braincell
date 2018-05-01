@@ -1,16 +1,12 @@
-
-/* http://bluecaret.com/blog/responsive-grid-of-squares */
-
 .grid {
     margin: 0 auto;
-
-    width: 70vw;
+    margin-top: 5px;
+    width: 82vw;
     max-width: 82vh;
-    height: 70vw;
+    height: 82vw;
     max-height: 82vh;
 
     font-size: 1rem;
-    border-style: solid;
     background-color: white;
 
     position: fixed;
