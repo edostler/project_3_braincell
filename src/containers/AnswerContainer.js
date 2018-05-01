@@ -16,7 +16,7 @@ class AnswerContainer extends Component {
     this.randomiseAnswers();
   }
 
-  randomiseAnswers() {
+  async randomiseAnswers() {
     this.state.randomAnswers = this.state.incorrectAnswers;
     let randomNumber = Math.floor(Math.random() * 4);
     this.state.randomAnswers.splice(randomNumber,0,this.state.correctAnswer);

@@ -41,6 +41,7 @@ class GameContainer extends Component {
     this.checkIncrementDiffculty = this.checkIncrementDiffculty.bind(this);
     this.removeCategory = this.removeCategory.bind(this);
     this.sampleQuestion = this.sampleQuestion.bind(this);
+    this.handleEndClick = this.handleEndClick.bind(this);
   }
 
   async componentDidMount(){
@@ -341,6 +342,13 @@ class GameContainer extends Component {
     }
   }
 
+  handleEndClick() {
+    console.log("We have clicked on End!");
+    this.setState({
+      gameStatus: 0
+    });
+  }
+
   render(){
     return (
       <React.Fragment>
@@ -360,6 +368,7 @@ class GameContainer extends Component {
             handleCategoryRandomise={this.handleCategoryRandomise}
             handleResult={this.handleResult}
             currentDifficultyValue={this.state.currentDifficultyValue}
+            handleEndClick={this.handleEndClick}
           />
         </div>
       </React.Fragment>

@@ -60,6 +60,7 @@ const MiddleContainer = (props) => {
             <End
               playerName={props.playerName}
               currentPoints={props.currentPoints}
+              handleEndClick={props.handleEndClick}
             />
           </div>
         </React.Fragment>

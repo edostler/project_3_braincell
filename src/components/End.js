@@ -5,7 +5,14 @@ const End = (props) => {
 
   return (
     <div className="end">
-      <p>I'm an End</p>
+      <p>
+        I'm an End
+      </p>
+      <img
+        src="chart-icon.png"
+        alt=""
+        onClick={props.handleEndClick}
+      />
     </div>
   )
 
