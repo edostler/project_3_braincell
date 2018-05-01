@@ -8,13 +8,13 @@ class GameContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      // categoryIndices: [],
       questions: [],
+      currentQuestion: {},
       playerName: null,
       currentCell: 0,
       currentPoints: 0,
-      gameStatus: 0,
       // gameStatus: 0 = Start, 1 = Choose Category, 2 = In Play, 3 = End
+      gameStatus: 0,
       difficulties: ["easy", "medium", "hard"],
 
       allCategories: [
@@ -29,33 +29,7 @@ class GameContainer extends Component {
         {id: 27, name: "Animals", state: 1}
       ],
 
-      playerCategories: [
-        {id: 9, name: "General Knowledge", state: 1},
-        {id: 17, name: "Science & Nature", state: 1},
-        {id: 20, name: "Mythology", state: 1},
-        {id: 21, name: "Sports", state: 1},
-        {id: 22, name: "Geography", state: 1},
-        {id: 23, name: "History", state: 1},
-        {id: 24, name: "Politics", state: 1},
-        {id: 25, name: "Art", state: 1},
-        {id: 27, name: "Animals", state: 1}
-      ],
-
-      currentCategory: {id: 0,   name: "To be selected...",  state: 1}, // default - might want to change this later
-
-      currentQuestion: {
-        "category": "",
-        "type": "",
-        "difficulty": "",
-        "question": "What's the colour of the sky?",
-        "correct_answer": "Blue",
-        "incorrect_answers":[
-          "Red",
-          "Green",
-          "Yellow"
-        ]
-      },      // Hard coded until we have API data
-
+      currentCategory: {id: 0, name: "To be selected...", state: 1},
       currentDifficulty: "easy",
       currentDifficultyValue: "1"
     }
@@ -126,6 +100,7 @@ class GameContainer extends Component {
       }
       return null;
     })
+    this.setState({playerCategories: this.state.allCategories})
   }
 
   async getQuestionCount(catId){
