@@ -14,56 +14,47 @@ const MiddleContainer = (props) => {
 
     if(props.gameStatus === 0) {
       return (
-        <React.Fragment>
-          <div className="middle-container">
-            <Start
-              playerName={props.playerName}
-              handlePlayerNameKeyUp={props.handlePlayerNameKeyUp}
-              handlePlayerNameSubmit={props.handlePlayerNameSubmit}
-            />
-          </div>
-        </React.Fragment>
+        <div className="middle-container">
+          <Start
+            playerName={props.playerName}
+            handlePlayerNameKeyUp={props.handlePlayerNameKeyUp}
+            handlePlayerNameSubmit={props.handlePlayerNameSubmit}
+          />
+        </div>
       )
     }
     else if(props.gameStatus === 1) {
       return (
-        <React.Fragment>
-          <div className="middle-container">
-            <Category
-              playerName={props.playerName}
-              playerCategories={props.playerCategories}
-              handleCategorySelect={props.handleCategorySelect}
-              handleCategoryRandomise={props.handleCategoryRandomise}
-              currentDifficultyValue={props.currentDifficultyValue}
-            />
-          </div>
-        </React.Fragment>
+        <div className="middle-container">
+          <Category
+            playerName={props.playerName}
+            playerCategories={props.playerCategories}
+            handleCategorySelect={props.handleCategorySelect}
+            handleCategoryRandomise={props.handleCategoryRandomise}
+            currentDifficultyValue={props.currentDifficultyValue}
+          />
+        </div>
       )
     }
     else if(props.gameStatus === 2) {
       return (
-        <React.Fragment>
-          <div className="middle-container">
-            <QuizContainer
-              playerName={props.playerName}
-              currentQuestion={props.currentQuestion}
-              handleResult={props.handleResult}
-            />
-          </div>
-        </React.Fragment>
+        <div className="middle-container">
+          <QuizContainer
+            currentQuestion={props.currentQuestion}
+            handleResult={props.handleResult}
+          />
+        </div>
       )
     }
     else {
       return (
-        <React.Fragment>
-          <div className="middle-container">
-            <End
-              playerName={props.playerName}
-              currentPoints={props.currentPoints}
-              handleEndClick={props.handleEndClick}
-            />
-          </div>
-        </React.Fragment>
+        <div className="middle-container">
+          <End
+            playerName={props.playerName}
+            currentPoints={props.currentPoints}
+            handleEndClick={props.handleEndClick}
+          />
+        </div>
       )
     }
 

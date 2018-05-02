@@ -160,17 +160,16 @@ class GameContainer extends Component {
   // (3) Set the gameStatus to 2, so that the QuizContainer is now rendered
   handleCategorySelect(event){
     const index = event.target.value;
-    const selectedCategory = this.state.playerCategories[index];
-    this.sampleQuestion(selectedCategory);
-    this.setState({
-      currentCategory: selectedCategory,
-      gameStatus: 2
-    });
+    this.useSelectedCategory(index);
   }
 
   handleCategoryRandomise(){
     const randomNumber = Math.floor(Math.random() * this.state.playerCategories.length);
-    const selectedCategory = this.state.playerCategories[randomNumber];
+    this.useSelectedCategory(randomNumber);
+  }
+
+  useSelectedCategory(index) {
+    const selectedCategory = this.state.playerCategories[index];
     this.sampleQuestion(selectedCategory);
     this.setState({
       currentCategory: selectedCategory,
@@ -202,6 +201,7 @@ class GameContainer extends Component {
         }
       }
       else if (difficultyGroup[1]) {
+        debugger;
         if (difficultyGroup[1].difficulty === this.state.currentDifficulty) {
           difficultyIndex = index;
         }
@@ -382,29 +382,27 @@ class GameContainer extends Component {
 
   render(){
     return (
-      <React.Fragment>
-        <div className="game-container">
-          <CellContainer
-            currentCell={this.state.currentCell}
-            cellImages={this.state.cellImages}
-            gameStatus={this.state.gameStatus}
-          />
-          <MiddleContainer
-            gameStatus={this.state.gameStatus}
-            playerName={this.state.playerName}
-            playerCategories={this.state.playerCategories}
-            currentQuestion={this.state.currentQuestion}
-            currentPoints={this.state.currentPoints}
-            handlePlayerNameKeyUp={this.handlePlayerNameKeyUp}
-            handlePlayerNameSubmit={this.handlePlayerNameSubmit}
-            handleCategorySelect={this.handleCategorySelect}
-            handleCategoryRandomise={this.handleCategoryRandomise}
-            handleResult={this.handleResult}
-            currentDifficultyValue={this.state.currentDifficultyValue}
-            handleEndClick={this.handleEndClick}
-          />
-        </div>
-      </React.Fragment>
+      <div className="game-container">
+        <CellContainer
+          currentCell={this.state.currentCell}
+          cellImages={this.state.cellImages}
+          gameStatus={this.state.gameStatus}
+        />
+        <MiddleContainer
+          gameStatus={this.state.gameStatus}
+          playerName={this.state.playerName}
+          playerCategories={this.state.playerCategories}
+          currentQuestion={this.state.currentQuestion}
+          currentPoints={this.state.currentPoints}
+          currentDifficultyValue={this.state.currentDifficultyValue}
+          handleEndClick={this.handleEndClick}
+          handlePlayerNameKeyUp={this.handlePlayerNameKeyUp}
+          handlePlayerNameSubmit={this.handlePlayerNameSubmit}
+          handleCategorySelect={this.handleCategorySelect}
+          handleCategoryRandomise={this.handleCategoryRandomise}
+          handleResult={this.handleResult}
+        />
+      </div>
     )
   }
 

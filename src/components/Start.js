@@ -11,6 +11,7 @@ const Start = (props) => {
           type="text"
           onKeyUp={props.handlePlayerNameKeyUp}
           placeholder="Enter your name"
+          required="required"
         />
         <input className="submit-input" type="submit" name="submit" value="Let's Play!" />
       </form>
