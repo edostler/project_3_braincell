@@ -9,8 +9,8 @@ import Adapter from 'enzyme-adapter-react-15'
   configure({adapter: new Adapter()})
 
   test('should render correct container', () => {
-    const gc = new GameContainer();
-    expect(gc.state.gameStatus).toEqual(0);
+    const gamecon = new GameContainer();
+    expect(gamecon.state.gameStatus).toEqual(0);
     // const containers = mount(<GameContainer/>);
     // console.log(containers);
     // expect(containers).toMatchSnapshot();
@@ -28,23 +28,50 @@ import Adapter from 'enzyme-adapter-react-15'
 
     const container = shallow(<GameContainer/>);
     container.instance().componentDidMount();
-  
+
   });
 
   test('should start a new player at zero points', () => {
-    const gamecont = new GameContainer();
-    expect(gamecont.state.currentPoints).toEqual(0);
+    const gamecon = new GameContainer();
+    expect(gamecon.state.currentPoints).toEqual(0);
   });
 
   test('should have nine catergories', () => {
-    const gamecont = new GameContainer();
-    expect(gamecont.state.allCategories.length).toEqual(9);
+    const gamecon = new GameContainer();
+    expect(gamecon.state.allCategories.length).toEqual(9);
   });
 
   test('should have level of difficulty', () => {
-    const gamecont = new GameContainer();
-    expect(gamecont.state.difficulties).toEqual(["easy", "medium", "hard"]);
+    const gamecon = new GameContainer();
+    expect(gamecon.state.difficulties).toEqual(["easy", "medium", "hard"]);
   });
+
+  test('should have a name', () => {
+    const gamecon = new GameContainer();
+    expect(gamecon.state.playerName).toEqual("Debbie");
+  });
+
+  test('should have a status 0', () => {
+    const gamecon = new GameContainer();
+    expect(gamecon.state.gameStatus).toEqual(0);
+  });
+
+  test('should have a status 1', () => {
+    const gamecon = new GameContainer();
+    expect(gamecon.state.gameStatus).toEqual(1);
+  });
+
+  test('should have a status 2', () => {
+    const gamecon = new GameContainer();
+    expect(gamecon.state.gameStatus).toEqual(2);
+  });
+
+  test('should have a status 3', () => {
+    const gamecon = new GameContainer();
+    expect(gamecon.state.gameStatus).toEqual(0);
+  });
+  
+
 
   // test('player can select from a list of categories', () => {
   //   const containers = mount.create(
