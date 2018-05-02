@@ -249,15 +249,16 @@ class GameContainer extends Component {
     if(result) {
       console.log("Correct!");
       const thisCell = this.state.currentCell;
-      const nextCell = this.state.currentCell + 1;
+      const nextCell = thisCell + 1;
+      const currentDifficultyValue = this.state.currentDifficultyValue
       let currentCellImages = this.state.cellImages;
       currentCellImages[thisCell] = "complete";
       this.setState({
         cellImages: currentCellImages,
         currentCell: nextCell,
-        currentPoints: this.state.currentPoints + 1
+        currentPoints: this.state.currentPoints + (20 * currentDifficultyValue)
       });
-      if(this.state.currentDifficultyValue < 4) {
+      if(currentDifficultyValue < 4) {
         this.removeCategory();
         this.checkIncrementDiffculty();
       }
@@ -283,6 +284,10 @@ class GameContainer extends Component {
     }
     else {
       console.log("Incorrect!");
+      const currentDifficultyValue = this.state.currentDifficultyValue
+      this.setState({
+        currentPoints: this.state.currentPoints - 20
+      });
       if (this.state.playerCategories.length === 0) {
         console.log("Out of Questions: Game Over!");
         this.setState({
