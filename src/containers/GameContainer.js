@@ -19,9 +19,25 @@ class GameContainer extends Component {
       questions: [],
       currentQuestion: {},
       currentCell: 0,
+      answeredQuestions: [
+        {name: "General Knowledge", answered: 0, correct: 0},
+        {name: "Science & Nature", answered: 0, correct: 0},
+        {name: "Mythology", answered: 0, correct: 0},
+        {name: "Sports", answered: 0, correct: 0},
+        {name: "Geography", answered: 0, correct: 0},
+        {name: "History", answered: 0, correct: 0},
+        {name: "Politics", answered: 0, correct: 0},
+        {name: "Art", answered: 0, correct: 0},
+        {name: "Animals", answered: 0, correct: 0}
+      ],
       playerResults: {
         name: "UNKNOWN",
-        result: 0
+        result: {
+          points: 0,
+          totalCorrectPercentage: null,
+          categoryCorrectPercentage: [null, null, null, null, null, null, null, null, null],
+          categoryCounter: [0,0,0,0,0,0,0,0,0]
+        }
       },
       // gameStatus: 0 = Start, 1 = Choose Category, 2 = In Play, 3 = End
       gameStatus: 0,
@@ -138,7 +154,12 @@ class GameContainer extends Component {
     this.setState({
       playerResults: {
         name: event.target.value,
-        result: this.state.playerResults.result
+        result: {
+          points: this.state.playerResults.result.points,
+          totalCorrectPercentage: this.state.playerResults.result.totalCorrectPercentage,
+          categoryCorrectPercentage: this.state.playerResults.result.categoryCorrectPercentage,
+          categoryCounter: this.state.playerResults.result.categoryCounter
+        }
       }
     });
   }
@@ -243,7 +264,52 @@ class GameContainer extends Component {
     }
   }
 
+  calculateTotalPercentage(currentAnsweredQuestions) {
+    let totalCorrect = 0;
+    let totalAnswered = 0;
+    currentAnsweredQuestions.forEach(function(categoryGroup) {
+      totalCorrect += categoryGroup.correct;
+      totalAnswered += categoryGroup.answered;
+    })
+    let totalPercentage = (totalCorrect/totalAnswered)*100;
+    return totalPercentage;
+  }
+
+  calculateCategoryPercentages(currentAnsweredQuestions) {
+    let newCategoryPercentages = [];
+    let index = 0;
+    currentAnsweredQuestions.forEach(function(categoryGroup) {
+      newCategoryPercentages[index] = (categoryGroup.correct / categoryGroup.answered)*100;
+      index += 1;
+    })
+    return newCategoryPercentages;
+  }
+
+  updateCategoryCounter(currentAnsweredQuestions) {
+    let newCategoryCounter = [];
+    let index = 0;
+    currentAnsweredQuestions.forEach(function(categoryGroup) {
+      newCategoryCounter[index] = categoryGroup.answered;
+      index += 1;
+    })
+    return newCategoryCounter;
+  }
+
   handleResult(result) {
+    let currentResults = this.state.playerResults;
+
+    let newAnsweredQuestions = this.state.answeredQuestions;
+    const currentCategory = this.state.currentCategory;
+    const categoryIndex = this.findCategoryIndex(currentCategory);
+
+    newAnsweredQuestions[categoryIndex].answered += 1;
+    this.setState({
+      answeredQuestions: newAnsweredQuestions
+    })
+
+    const newCategoryCounter = this.updateCategoryCounter(newAnsweredQuestions)
+    currentResults.result.categoryCounter = newCategoryCounter;
+
     if(result) {
       console.log("Correct!");
       const thisCell = this.state.currentCell;
@@ -252,13 +318,21 @@ class GameContainer extends Component {
       let currentCellImages = this.state.cellImages;
       currentCellImages[thisCell] = "complete";
 
-      let currentResults = this.state.playerResults;
-      currentResults.result += (20 * currentDifficultyValue);
+      newAnsweredQuestions[categoryIndex].correct += 1;
+
+      const newTotalPercentage = this.calculateTotalPercentage(newAnsweredQuestions);
+
+      const newCategoryPercentages = this.calculateCategoryPercentages(newAnsweredQuestions);
+
+      currentResults.result.points += (20 * currentDifficultyValue);
+      currentResults.result.totalCorrectPercentage = newTotalPercentage;
+      currentResults.result.categoryCorrectPercentage = newCategoryPercentages;
 
       this.setState({
         cellImages: currentCellImages,
         currentCell: nextCell,
-        playerResults: currentResults
+        playerResults: currentResults,
+        answeredQuestions: newAnsweredQuestions
       });
       if(currentDifficultyValue < 4) {
         this.removeCategory();
@@ -286,8 +360,14 @@ class GameContainer extends Component {
     }
     else {
       console.log("Incorrect!");
-      let currentResults = this.state.playerResults;
-      currentResults.result -= 20;
+      const newTotalPercentage = this.calculateTotalPercentage(newAnsweredQuestions);
+
+      const newCategoryPercentages = this.calculateCategoryPercentages(newAnsweredQuestions);
+
+      currentResults.result.points -= 20;
+      currentResults.result.totalCorrectPercentage = newTotalPercentage;
+      currentResults.result.categoryCorrectPercentage = newCategoryPercentages;
+
       this.setState({
         playerResults: currentResults
       });
