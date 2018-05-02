@@ -202,7 +202,6 @@ class GameContainer extends Component {
         }
       }
       else if (difficultyGroup[1]) {
-        debugger;
         if (difficultyGroup[1].difficulty === this.state.currentDifficulty) {
           difficultyIndex = index;
         }
@@ -318,7 +317,10 @@ class GameContainer extends Component {
   removeExhaustedHardCategories(){
     let remainingHardCategories = this.state.allCategories;
     let categoryIndex = 0;
-    let flagArray = [0,0,0,0,0,0,0,0,0];
+    let flagArray = [];
+    this.state.allCategories.forEach(function(categoryGroup) {
+      flagArray.push(0);
+    });
     this.state.questions.forEach(function(categoryGroup) {
       let hardDifficultyIndex = null;
       let index = 0;
