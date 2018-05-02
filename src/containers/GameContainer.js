@@ -18,11 +18,10 @@ class GameContainer extends Component {
     this.state = {
       questions: [],
       currentQuestion: {},
-      playerName: null,
       currentCell: 0,
       playerResults: {
         name: "UNKNOWN",
-        result: 100
+        result: 0
       },
       // gameStatus: 0 = Start, 1 = Choose Category, 2 = In Play, 3 = End
       gameStatus: 0,
@@ -138,7 +137,8 @@ class GameContainer extends Component {
   handlePlayerNameKeyUp(event) {
     this.setState({
       playerResults: {
-        name: event.target.value
+        name: event.target.value,
+        result: this.state.playerResults.result
       }
     });
   }
@@ -252,12 +252,14 @@ class GameContainer extends Component {
       const currentDifficultyValue = this.state.currentDifficultyValue
       let currentCellImages = this.state.cellImages;
       currentCellImages[thisCell] = "complete";
+
+      let currentResults = this.state.playerResults;
+      currentResults.result += (20 * currentDifficultyValue);
+
       this.setState({
         cellImages: currentCellImages,
         currentCell: nextCell,
-        playerResults: {
-          result: this.state.playerResults.result + (20 * currentDifficultyValue)
-        }
+        playerResults: currentResults
       });
       if(currentDifficultyValue < 4) {
         this.removeCategory();
@@ -302,7 +304,6 @@ class GameContainer extends Component {
         });
       }
     }
-    // Update the object of results for the current player:
   }
 
   removeCategory(){
@@ -377,9 +378,9 @@ class GameContainer extends Component {
   // So that it is available for generating stats/charts/leader-board
   handleEndClick() {
     requestPlayers.post(createRequestComplete, this.state.playerResults);
-    this.setState({
-      gameStatus: 0
-    });
+    // this.setState({
+    //   gameStatus: 0
+    // });
   }
 
   render(){
