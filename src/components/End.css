@@ -6,14 +6,49 @@
   overflow: hidden;
 }
 
-.end-text {
-  height: 30%;
+.end-textbox {
+  height: 60%;
   width: 80%;
   margin: 10%;
   text-align: center;
   background-color: #4F247C;
   color: white;
   font-size: 16px;
+}
+
+.end-text {
+  height: 20%;
+  margin: 0;
+  padding: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.end-result-points {
+  height: 20%;
+  margin: 0;
+  padding: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+}
+
+.end-result-percentage {
+  height: 20%;
+  margin: 0;
+  padding: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.end-result-favourite {
+  height: 20%;
+  margin: 0;
+  padding: 2%;
   display: flex;
   align-items: center;
   justify-content: center;

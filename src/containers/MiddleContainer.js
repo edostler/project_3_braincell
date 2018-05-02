@@ -50,6 +50,8 @@ const MiddleContainer = (props) => {
         <div className="middle-container">
           <End
             handleEndClick={props.handleEndClick}
+            playerResults={props.playerResults}
+            currentCell={props.currentCell}
           />
         </div>
       )

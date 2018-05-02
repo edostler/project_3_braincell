@@ -36,7 +36,8 @@ class GameContainer extends Component {
           points: 0,
           totalCorrectPercentage: null,
           categoryCorrectPercentage: [null, null, null, null, null, null, null, null, null],
-          categoryCounter: [0,0,0,0,0,0,0,0,0]
+          categoryCounter: [0,0,0,0,0,0,0,0,0],
+          favouriteCategory: null
         }
       },
       // gameStatus: 0 = Start, 1 = Choose Category, 2 = In Play, 3 = End
@@ -74,6 +75,8 @@ class GameContainer extends Component {
     this.removeCategory = this.removeCategory.bind(this);
     this.sampleQuestion = this.sampleQuestion.bind(this);
     this.handleEndClick = this.handleEndClick.bind(this);
+    this.handleEndGame = this.handleEndGame.bind(this);
+    this.updateFavouriteCategory = this.updateFavouriteCategory.bind(this);
   }
 
   async componentDidMount(){
@@ -295,6 +298,20 @@ class GameContainer extends Component {
     return newCategoryCounter;
   }
 
+  updateFavouriteCategory(newCategoryCounter) {
+    const currentMaximum = Math.max(...newCategoryCounter);
+    let maxCategoryIndex = null;
+    let index = 0;
+    newCategoryCounter.forEach(function(categoryGroup) {
+      if(categoryGroup === currentMaximum) {
+        maxCategoryIndex = index;
+      }
+      index += 1;
+    });
+    const newFavouriteCategory = this.state.allCategories[maxCategoryIndex].name;
+    return newFavouriteCategory;
+  }
+
   handleResult(result) {
     let currentResults = this.state.playerResults;
 
@@ -309,6 +326,8 @@ class GameContainer extends Component {
 
     const newCategoryCounter = this.updateCategoryCounter(newAnsweredQuestions)
     currentResults.result.categoryCounter = newCategoryCounter;
+    const newFavouriteCategory = this.updateFavouriteCategory(newCategoryCounter);
+    currentResults.result.favouriteCategory = newFavouriteCategory;
 
     if(result) {
       console.log("Correct!");
@@ -465,6 +484,12 @@ class GameContainer extends Component {
     // });
   }
 
+  handleEndGame() {
+    this.setState({
+      gameStatus: 3
+    });
+  }
+
   render(){
     return (
       <div className="game-container">
@@ -477,6 +502,8 @@ class GameContainer extends Component {
           gameStatus={this.state.gameStatus}
           playerName={this.state.playerName}
           playerCategories={this.state.playerCategories}
+          playerResults={this.state.playerResults}
+          currentCell={this.state.currentCell}
           currentQuestion={this.state.currentQuestion}
           currentDifficultyValue={this.state.currentDifficultyValue}
           handleEndClick={this.handleEndClick}
@@ -486,6 +513,7 @@ class GameContainer extends Component {
           handleCategoryRandomise={this.handleCategoryRandomise}
           handleResult={this.handleResult}
         />
+        <button onClick={this.handleEndGame}>End</button>
       </div>
     )
   }

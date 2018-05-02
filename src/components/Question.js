@@ -5,7 +5,7 @@ const Question = (props) => {
 
   return (
     <div className="question">
-      <p className="current-question"> {props.currentQuestion.question}</p>
+      <p dangerouslySetInnerHTML={{__html: props.currentQuestion.question}} className="current-question"></p>
     </div>
   )
 
