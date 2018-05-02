@@ -286,10 +286,10 @@ class GameContainer extends Component {
     }
     else {
       console.log("Incorrect!");
+      let currentResults = this.state.playerResults;
+      currentResults.result -= 20;
       this.setState({
-        playerResults: {
-          result: this.state.playerResults.result - 20
-        }
+        playerResults: currentResults
       });
       if (this.state.playerCategories.length === 0) {
         console.log("Out of Questions: Game Over!");
