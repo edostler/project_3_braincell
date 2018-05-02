@@ -25,7 +25,7 @@
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 1s;
+  transition: transform 2s;
 }
 
 #inner figure {
@@ -58,9 +58,9 @@
 
 #inner .answered   {
   background: #FF9000;
-  transform: rotateY( 180deg );
+  transform: rotateY( 540deg );
 }
 
 #inner.complete {
-  transform: rotateY( 180deg );
+  transform: rotateY( 540deg );
 }
