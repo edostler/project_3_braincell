@@ -91,10 +91,8 @@ class GameContainer extends Component {
 
             let url = "https://opentdb.com/api.php?amount=" +
               defaultQuestionCount +
-            "&category=" +
-            this.state.allCategories[index].id +
-            "&difficulty=" +
-            difficulty;
+              "&category=" + this.state.allCategories[index].id +
+              "&difficulty=" + difficulty;
             fetch(url)
             .then(response => response.json())
             .then((json) => {
