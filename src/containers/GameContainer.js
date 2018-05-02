@@ -20,7 +20,6 @@ class GameContainer extends Component {
       currentQuestion: {},
       playerName: null,
       currentCell: 0,
-      currentPoints: 0,
       playerResults: {
         name: "UNKNOWN",
         result: 100
@@ -138,7 +137,9 @@ class GameContainer extends Component {
   // (1) Update the playerName to be the one that has been entered
   handlePlayerNameKeyUp(event) {
     this.setState({
-      playerName: event.target.value
+      playerResults: {
+        name: event.target.value
+      }
     });
   }
 
@@ -254,7 +255,9 @@ class GameContainer extends Component {
       this.setState({
         cellImages: currentCellImages,
         currentCell: nextCell,
-        currentPoints: this.state.currentPoints + (20 * currentDifficultyValue)
+        playerResults: {
+          result: this.state.playerResults.result + (20 * currentDifficultyValue)
+        }
       });
       if(currentDifficultyValue < 4) {
         this.removeCategory();
@@ -283,7 +286,9 @@ class GameContainer extends Component {
     else {
       console.log("Incorrect!");
       this.setState({
-        currentPoints: this.state.currentPoints - 20
+        playerResults: {
+          result: this.state.playerResults.result - 20
+        }
       });
       if (this.state.playerCategories.length === 0) {
         console.log("Out of Questions: Game Over!");
@@ -298,12 +303,6 @@ class GameContainer extends Component {
       }
     }
     // Update the object of results for the current player:
-    this.setState({
-      playerResults: {
-        name: this.state.playerName,
-        result: this.state.currentPoints
-      }
-    });
   }
 
   removeCategory(){
@@ -378,6 +377,9 @@ class GameContainer extends Component {
   // So that it is available for generating stats/charts/leader-board
   handleEndClick() {
     requestPlayers.post(createRequestComplete, this.state.playerResults);
+    this.setState({
+      gameStatus: 0
+    });
   }
 
   render(){
@@ -393,7 +395,6 @@ class GameContainer extends Component {
           playerName={this.state.playerName}
           playerCategories={this.state.playerCategories}
           currentQuestion={this.state.currentQuestion}
-          currentPoints={this.state.currentPoints}
           currentDifficultyValue={this.state.currentDifficultyValue}
           handleEndClick={this.handleEndClick}
           handlePlayerNameKeyUp={this.handlePlayerNameKeyUp}

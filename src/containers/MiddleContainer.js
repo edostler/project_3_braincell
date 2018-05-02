@@ -27,7 +27,6 @@ const MiddleContainer = (props) => {
       return (
         <div className="middle-container">
           <Category
-            playerName={props.playerName}
             playerCategories={props.playerCategories}
             handleCategorySelect={props.handleCategorySelect}
             handleCategoryRandomise={props.handleCategoryRandomise}
@@ -50,8 +49,6 @@ const MiddleContainer = (props) => {
       return (
         <div className="middle-container">
           <End
-            playerName={props.playerName}
-            currentPoints={props.currentPoints}
             handleEndClick={props.handleEndClick}
           />
         </div>
