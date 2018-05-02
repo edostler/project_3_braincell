@@ -284,7 +284,6 @@ class GameContainer extends Component {
     }
     else {
       console.log("Incorrect!");
-      const currentDifficultyValue = this.state.currentDifficultyValue
       this.setState({
         currentPoints: this.state.currentPoints - 20
       });
