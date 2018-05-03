@@ -11,7 +11,6 @@ const Header = (props) => {
           src="logo.png"
           alt=""
         />
-        <p className="chart-status">Show Chart Status: {props.showChart}</p>
         <img
           className="chart-icon"
           src="chart-icon.png"

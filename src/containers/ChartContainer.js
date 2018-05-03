@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import './ChartContainer.css';
-
-import { render } from 'react-dom';
-import { Chart } from 'react-google-charts';
-
+import ChartBox from '../components/ChartBox';
 
 class ChartContainer extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-      playerData: []
+      players: []
     };
   }
 
@@ -19,40 +16,31 @@ class ChartContainer extends Component {
     fetch(url)
     .then(response => response.json())
     .then ((json) => {
-      this.setState({playerData: (json)})
-      // this.state.playerData = (json)
-      console.log("this",this.state.playerData)
+      this.setState({players: (json)})
     })
   }
 
 
   render(){
-    if (!this.state.playerData) return null;
+    if (!this.state.players) return null;
     return (
         <div className="chart-container" style={{zIndex: this.props.showChart}}>
-          <p>I'm a Chart Container</p>
-          <Chart
-            chartType="ColumnChart"
-            data={[['Name', 'Score'],
-                  // [this.state.playerData[9].name, this.state.playerData[9].result],
-                  // [this.state.playerData[10].name, this.state.playerData[10].result],
-                  // [this.state.playerData[11].name, this.state.playerData[11].result]
-                  ["Ed", 1000],
-                  ["Debbie", 980],
-                  ["Graeme",900],
-                  ["Sarah", 800]
-                ]}
-            options={{}}
-            graph_id="ColumnChart"
-            width="100%"
-            height="400px"
-            legend_toggle
+          <ChartBox className="chart-box"
+            players={this.state.players}
+            type="ColumnChart"
+            xAxis="Name"
+            yAxis="Result"
+          />
+          <ChartBox className="chart-box"
+            players={this.state.players}
+            type="LineChart"
+            xAxis="Timestamp"
+            yAxis="Result"
           />
         </div>
     )
   }
 
 }
-
 
 export default ChartContainer;
