@@ -30,19 +30,22 @@ class ChartContainer extends Component {
             type="ColumnChart"
             xAxis="Name"
             yAxis="Result"
+            chartId="A"
           />
           <ChartBox className="chart-box"
             players={this.state.players}
             type="LineChart"
             xAxis="Timestamp"
             yAxis="Result"
+            chartId="B"
           />
-          {/* <ChartBox className="chart-box"
+          <ChartBox className="chart-box"
             players={this.state.players}
             type="ColumnChart"
-            xAxis="Favourite Category"
+            xAxis="Timestamp"
             yAxis="Result"
-          /> */}
+            chartId="C"
+          />
         </div>
     )
   }
