@@ -19,7 +19,6 @@ class App extends Component {
   // so that is visible/invisible to the user - after clicking the chart icon
   // in the header:
   handleChartClick(){
-    console.log("Player clicked chart icon..");
     if(this.state.showChart === -2){
       this.setState({
         showChart: 2
