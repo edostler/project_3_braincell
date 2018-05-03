@@ -28,7 +28,7 @@ const ChartBox = (props) => {
     }
     // Current player stats, trend over time...
     else if(props.xAxis === "Favourite Category"){
-      return getData(player.favouriteCategory, player.result.points);
+      return getData(player.name, player.result.points);
     }
     else {
       return [];
@@ -47,7 +47,7 @@ const ChartBox = (props) => {
         options={{}}
         graph_id={props.chartId}
         width="100%"
-        height="400px"
+        height="200px"
         legend_toggle
       />
     </div>
