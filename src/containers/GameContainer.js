@@ -266,7 +266,6 @@ class GameContainer extends Component {
     let filteredQuestionArray = this.state.questions;
     filteredQuestionArray[categoryIndex][difficultyIndex] = filteredDifficultyArray;
     this.setState({questions: filteredQuestionArray});
-    console.log(sampledQuestion.difficulty);
     // if sampled question was last in difficulty then remove category from playerCategories
     if (difficultyArrayLength === 1) {
       let filteredCategoryArray = this.state.playerCategories.filter(item => item !== selectedCategory);
@@ -366,7 +365,6 @@ class GameContainer extends Component {
       this.setState({
         lastResult: "Correct!"
       })
-      console.log("Correct!");
       const thisCell = this.state.currentCell;
       const nextCell = thisCell + 1;
       const currentDifficultyValue = this.state.currentDifficultyValue
@@ -395,7 +393,6 @@ class GameContainer extends Component {
       }
       if (nextCell !== 20) {
         if (this.state.playerCategories.length === 0) {
-          console.log("Out of Questions: Game Over!");
           this.setState({
             gameStatus: 3
           });
@@ -407,7 +404,6 @@ class GameContainer extends Component {
         }
       }
       else {
-        console.log("Congratulations!");
         this.setState({
           gameStatus: 3
         });
@@ -418,7 +414,6 @@ class GameContainer extends Component {
       this.setState({
         lastResult: "Incorrect!"
       })
-      console.log("Incorrect!");
       const newTotalPercentage = this.calculateTotalPercentage(newAnsweredQuestions);
 
       const newCategoryPercentages = this.calculateCategoryPercentages(newAnsweredQuestions);
@@ -431,7 +426,6 @@ class GameContainer extends Component {
         playerResults: currentResults
       });
       if (this.state.playerCategories.length === 0) {
-        console.log("Out of Questions: Game Over!");
         this.setState({
           gameStatus: 3
         });
