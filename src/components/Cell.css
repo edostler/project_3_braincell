@@ -45,18 +45,26 @@
 
 #easy #inner .unanswered   {
   background: limegreen;
+  background-image: url("/564024-200.png");
+  background-size: 100%;
 }
 
 #medium #inner .unanswered   {
   background: dodgerblue;
+  background-image: url("/564024-200.png");
+  background-size: 100%;
 }
 
 #hard #inner .unanswered   {
   background: red;
+  background-image: url("/564024-200.png");
+  background-size: 100%;
 }
 
 #mix #inner .unanswered   {
   background: yellow;
+  background-image: url("/564024-200.png");
+  background-size: 100%;
 }
 
 #inner .answered   {
