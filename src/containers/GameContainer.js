@@ -559,7 +559,7 @@ class GameContainer extends Component {
             {this.state.lastResult}
           </div>
         </div>
-        <button onClick={this.handleEndGame}>End</button>
+        {/* <button onClick={this.handleEndGame}>End</button> */}
       </div>
     )
   }
