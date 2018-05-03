@@ -42,7 +42,7 @@ class ChartContainer extends Component {
           <ChartBox className="chart-box"
             players={this.state.players}
             type="ColumnChart"
-            xAxis="Timestamp"
+            xAxis="Favourite Category"
             yAxis="Result"
             chartId="C"
           />
