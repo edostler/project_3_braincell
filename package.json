@@ -19,7 +19,7 @@
     "webdriver-update": "webdriver-manager update",
     "webdriver": "webdriver-manager start",
     "protractor": "protractor conf.js",
-    "start": "nodemon server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "mocha tests/tests/integration/sit.gamecontainer.test.js",
     "eject": "react-scripts eject"
