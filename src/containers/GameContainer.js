@@ -514,9 +514,10 @@ class GameContainer extends Component {
   // So that it is available for generating stats/charts/leader-board
   handleEndClick() {
     requestPlayers.post(createRequestComplete, this.state.playerResults);
-    this.setState({
-      gameStatus: 0
-    });
+    window.location.reload()
+    // this.setState({
+    //   gameStatus: 0
+    // });
   }
 
   handleEndGame() {
