@@ -14,16 +14,18 @@ describe('game functionality', function() {
   // write integration tests here in the form of "it should do something..."
 
   it('should allow the user to enter a name', function(){
-    playerName = element(by.css('#setState'))
-    element(by.css('#handlePlayerNameKeyUp')).click();
-    expect(playerName.getAttribute('value')).to.eventually.equal("name")
+    this.state.playerResults.name = element(by.css('#this.state.playerResults.name'))
+    element(by.css('#handlePlayerNameKeyUp')).click("D");
+    element(by.css('#handlePlayerNameKeyUp')).click("o");
+    element(by.css('#handlePlayerNameKeyUp')).click("r");
+    element(by.css('#handlePlayerNameKeyUp')).click("i");
+    element(by.css('#handlePlayerNameKeyUp')).click("s");
+    expect(this.state.playerResults.name.getAttribute('value')).to.eventually.equal("Doris")
   });
 
  // check how to verify name submit, perhaps can verify on player name left column
-  it('should allow the user to submit a name', function(){
-    playerName = element(by.css('#setState'))
-    element(by.css('#handlePlayerNameSubmit')).click();
-    expect(playerName.getAttribute('value')).to.eventually.equal("name")
-  });
-
-  
+  // it('should allow the user to submit a name', function(){
+  //   playerName = element(by.css('#setState'))
+  //   element(by.css('#handlePlayerNameSubmit')).click();
+  //   expect(playerName.getAttribute('value')).to.eventually.equal("name")
+  // });
