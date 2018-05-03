@@ -38,6 +38,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 #easy #inner .unanswered   {
