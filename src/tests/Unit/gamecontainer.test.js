@@ -41,6 +41,16 @@ import Adapter from 'enzyme-adapter-react-15'
     expect(gamecon.state.allCategories.length).toEqual(9);
   });
 
+  test('should have selected player catergories', () => {
+    const gamecon = new GameContainer();
+    expect(gamecon.state.playerCategories.length).toEqual(1);
+  });
+
+  test('should have a default of nine answers', () => {
+    const gamecon = new GameContainer();
+    expect(gamecon.state.answeredQuestions.length).toEqual(9);
+  });
+
   test('should have level of difficulty', () => {
     const gamecon = new GameContainer();
     expect(gamecon.state.difficulties).toEqual(["easy", "medium", "hard"]);
@@ -68,9 +78,11 @@ import Adapter from 'enzyme-adapter-react-15'
 
   test('should have a status 3', () => {
     const gamecon = new GameContainer();
-    expect(gamecon.state.gameStatus).toEqual(0);
+    expect(gamecon.state.gameStatus).toEqual(3);
   });
-  
+
+
+
 
 
   // test('player can select from a list of categories', () => {
@@ -85,7 +97,3 @@ import Adapter from 'enzyme-adapter-react-15'
   // // re-rendering
   // history = containers.toJSON();
   // expect(history).toMatchSnapshot();
-
-  // test('player can move through each level', () => {
-  // test('player can have a name', () => {
-  // test('game can have a status', () => {

@@ -12,8 +12,7 @@ describe('game status functionality', function() {
   });
 
   // write integration tests here in the form of "it should do something..."
-  // check with ed when and how game status changes, is this on name click or between questions and answers. May need to review gameStatus, click and where the value is coming from.
-  
+
   it('should have a game status 0', function(){
     gameStatus = element(by.css('#gameStatus'))
     element(by.css('#0')).click();
