@@ -37,6 +37,12 @@ class ChartContainer extends Component {
             xAxis="Timestamp"
             yAxis="Result"
           />
+          {/* <ChartBox className="chart-box"
+            players={this.state.players}
+            type="ColumnChart"
+            xAxis="Favourite Category"
+            yAxis="Result"
+          /> */}
         </div>
     )
   }

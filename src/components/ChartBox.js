@@ -18,10 +18,16 @@ const ChartBox = (props) => {
 
   // Add elements for each player, that contain each x,y value:
   const data = props.players.map((player, index) => {
+    // Leader-board...
     if(props.xAxis === "Name"){
       return getData(player.name, player.result.points);
     }
+    // Current player stats, trend over time...
     else if(props.xAxis === "Timestamp"){
+      return getData(player.timestamp, player.result.points);
+    }
+    // Current player stats, trend over time...
+    else if(props.xAxis === "Favourite Category"){
       return getData(player.timestamp, player.result.points);
     }
     else {
