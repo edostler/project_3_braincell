@@ -4,15 +4,16 @@ import './Cell.css';
 const Cell = (props) => {
 
   var figureStyle = {
-    outline: "2px solid black"
+    // outline: "3px solid black"
+    backgroundColor: "#FF9000"
   };
 
   if((parseInt(props.position, 10) === props.currentCell + 1) && props.gameStatus > 0) {
     return (
       <article id={props.difficulty} className="box">
         <div id="inner" className={props.cellImages[parseInt(props.position - 1, 10)]}>
-          <figure style={figureStyle} className="unanswered">Cell {props.position}</figure>
-          <figure className="answered">Cell {props.position}</figure>
+          <figure style={figureStyle} className="unanswered"></figure>
+          <figure className="answered">{props.position}</figure>
         </div>
       </article>
     )
@@ -21,8 +22,8 @@ const Cell = (props) => {
     return (
       <article id={props.difficulty} className="box">
         <div id="inner" className={props.cellImages[parseInt(props.position - 1, 10)]}>
-          <figure className="unanswered">Cell {props.position}</figure>
-          <figure className="answered">Cell {props.position}</figure>
+          <figure className="unanswered"></figure>
+          <figure className="answered">{props.position}</figure>
         </div>
       </article>
     )
