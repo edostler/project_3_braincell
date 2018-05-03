@@ -192,6 +192,20 @@ class GameContainer extends Component {
   // (3) Set the gameStatus to 2, so that the QuizContainer is now rendered
   handleCategorySelect(event){
     const index = event.target.value;
+
+    // UNFINISHED CODE FOR CHANGING DROPDOWN TO CLICKABLE TILES
+    // const categoryName = event.target.value;
+    // const allCategories = this.state.playerCategories;
+    // let index = 0;
+    // let categoryIndex
+    // allCategories.forEach(function(categoryGroup) {
+    //   if(categoryGroup.name === categoryName) {
+    //     categoryIndex = index;
+    //   }
+    //   index += 1;
+    // })
+    // UNFINISHED CODE FOR CHANGING DROPDOWN TO CLICKABLE TILES
+
     this.useSelectedCategory(index);
   }
 

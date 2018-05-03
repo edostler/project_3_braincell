@@ -23,6 +23,21 @@ const Category = (props) => {
               disabled value="default">Choose a category...</option>
             {options}
           </select>
+
+          {/* UNFINISHED CODE FOR CHANGING DROPDOWN TO CLICKABLE TILES
+          <div className="category-group">
+            <div onClick={props.handleCategorySelect} className="category-button">{props.playerCategories[0].name}</div>
+            <div onClick={props.handleCategorySelect} className="category-button">{props.playerCategories[1].name}</div>
+            <div onClick={props.handleCategorySelect} className="category-button">{props.playerCategories[2].name}</div>
+            <div onClick={props.handleCategorySelect} className="category-button">{props.playerCategories[3].name}</div>
+            <div onClick={props.handleCategorySelect} className="category-button">{props.playerCategories[4].name}</div>
+            <div onClick={props.handleCategorySelect} className="category-button">{props.playerCategories[5].name}</div>
+            <div onClick={props.handleCategorySelect} className="category-button">{props.playerCategories[6].name}</div>
+            <div onClick={props.handleCategorySelect} className="category-button">{props.playerCategories[7].name}</div>
+            <div onClick={props.handleCategorySelect} className="category-button">{props.playerCategories[8].name}</div>
+          </div>
+          UNFINISHED CODE FOR CHANGING DROPDOWN TO CLICKABLE TILES */}
+
         </div>
       </React.Fragment>
     )

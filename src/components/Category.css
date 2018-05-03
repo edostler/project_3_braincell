@@ -19,6 +19,24 @@
   justify-content: center;
 }
 
+.category-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.category-button {
+  margin: 10px auto;
+  height: 50px;
+  width: 110px;
+  color: #fff;
+  background-color: #FF9000;
+  box-shadow: 5px 5px 5px grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 .category-select {
   height: 10%;
   width: 60%;
