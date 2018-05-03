@@ -64,7 +64,10 @@ class GameContainer extends Component {
         "medium", "medium", "medium", "medium", "medium",
         "hard", "hard", "hard", "hard", "hard",
         "mix", "mix", "mix", "mix", "mix"
-      ]
+      ],
+      lastResult: null,
+      correctModal: "none",
+      incorrectModal: "none"
     }
     this.handlePlayerNameKeyUp = this.handlePlayerNameKeyUp.bind(this);
     this.handlePlayerNameSubmit = this.handlePlayerNameSubmit.bind(this);
@@ -76,6 +79,10 @@ class GameContainer extends Component {
     this.sampleQuestion = this.sampleQuestion.bind(this);
     this.handleEndClick = this.handleEndClick.bind(this);
     this.handleEndGame = this.handleEndGame.bind(this);
+    this.handleCorrectModalOpen = this.handleCorrectModalOpen.bind(this);
+    this.handleIncorrectModalOpen = this.handleIncorrectModalOpen.bind(this);
+    this.handleCorrectModalClose = this.handleCorrectModalClose.bind(this);
+    this.handleIncorrectModalClose = this.handleIncorrectModalClose.bind(this);
     this.updateFavouriteCategory = this.updateFavouriteCategory.bind(this);
   }
 
@@ -312,6 +319,32 @@ class GameContainer extends Component {
     return newFavouriteCategory;
   }
 
+  handleCorrectModalClose() {
+    this.setState({
+      correctModal: "none"
+    })
+  }
+
+  handleCorrectModalOpen() {
+    this.setState({
+      correctModal: "block"
+    })
+    window.setTimeout(this.handleCorrectModalClose, 1000);
+  }
+
+  handleIncorrectModalClose() {
+    this.setState({
+      incorrectModal: "none"
+    })
+  }
+
+  handleIncorrectModalOpen() {
+    this.setState({
+      incorrectModal: "block"
+    })
+    window.setTimeout(this.handleIncorrectModalClose, 1000);
+  }
+
   handleResult(result) {
     let currentResults = this.state.playerResults;
 
@@ -330,6 +363,9 @@ class GameContainer extends Component {
     currentResults.result.favouriteCategory = newFavouriteCategory;
 
     if(result) {
+      this.setState({
+        lastResult: "Correct!"
+      })
       console.log("Correct!");
       const thisCell = this.state.currentCell;
       const nextCell = thisCell + 1;
@@ -376,8 +412,12 @@ class GameContainer extends Component {
           gameStatus: 3
         });
       }
+      this.handleCorrectModalOpen();
     }
     else {
+      this.setState({
+        lastResult: "Incorrect!"
+      })
       console.log("Incorrect!");
       const newTotalPercentage = this.calculateTotalPercentage(newAnsweredQuestions);
 
@@ -401,6 +441,7 @@ class GameContainer extends Component {
           gameStatus: 1
         });
       }
+      this.handleIncorrectModalOpen();
     }
   }
 
@@ -513,7 +554,17 @@ class GameContainer extends Component {
           handleCategoryRandomise={this.handleCategoryRandomise}
           handleResult={this.handleResult}
         />
-        <button onClick={this.handleEndGame}>End</button>
+        <div style={{display: this.state.correctModal}} id="myCorrectModal" className="correct-modal">
+          <div className="correct-modal-content">
+            {this.state.lastResult}
+          </div>
+        </div>
+        <div style={{display: this.state.incorrectModal}} id="myIncorrectModal" className="incorrect-modal">
+          <div className="incorrect-modal-content">
+            {this.state.lastResult}
+          </div>
+        </div>
+        {/* <button onClick={this.handleEndGame}>End</button> */}
       </div>
     )
   }
