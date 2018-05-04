@@ -6,8 +6,8 @@ import MiddleContainer from './MiddleContainer';
 const Request = require('../services/requests.js');
 const requestPlayers = new Request('http://localhost:3001/players');
 
-// This callback is activated once the POST is complete:
 const createRequestComplete = function(response){
+  // This callback is activated once the POST is complete:
   console.log(response);
 }
 
@@ -86,6 +86,8 @@ class GameContainer extends Component {
     this.updateFavouriteCategory = this.updateFavouriteCategory.bind(this);
   }
 
+
+  // API FUNCTIONS:
   async componentDidMount(){
     let defaultQuestionCount = 20;
     this.state.allCategories.map((category, index) => {
@@ -157,10 +159,12 @@ class GameContainer extends Component {
     return questionCountArray;
   }
 
-  // This callback is activated from Start.js,
-  // when the player enters their name:
-  // (1) Update the playerName to be the one that has been entered
+
+  // GAME STATE 0 (START) FUNCTIONS:
   handlePlayerNameKeyUp(event) {
+    // This callback is activated from Start.js,
+    // when the player enters their name:
+    // (1) Update the playerName to be the one that has been entered
     this.setState({
       playerResults: {
         name: event.target.value,
@@ -174,23 +178,25 @@ class GameContainer extends Component {
     });
   }
 
-  // This callback is activated from Start.js,
-  // when the player hits submit ('Go' button)
-  // after entering their name:
-  // (1) Set the gameStatus to 1, so that the Category component is now rendered
   handlePlayerNameSubmit(event) {
+    // This callback is activated from Start.js,
+    // when the player hits submit ('Go' button)
+    // after entering their name:
+    // (1) Set the gameStatus to 1, so that the Category component is now rendered
     event.preventDefault();
     this.setState({
       gameStatus: 1
     });
   }
 
-  // This callback is activated from Category.js,
-  // when the player chooses a category from the select dropdown list:
-  // (1) Update the currentCategory to be the one that has been selected
-  // (2) Remove that category from the player's list of available categories - TBD
-  // (3) Set the gameStatus to 2, so that the QuizContainer is now rendered
+
+  // GAME STATE 1 (CHOOSE CATEGORY -> SAMPLE QUESTION) FUNCTIONS:
   handleCategorySelect(event){
+    // This callback is activated from Category.js,
+    // when the player chooses a category from the select dropdown list:
+    // (1) Update the currentCategory to be the one that has been selected
+    // (2) Remove that category from the player's list of available categories - TBD
+    // (3) Set the gameStatus to 2, so that the QuizContainer is now rendered
     const index = event.target.value;
 
     // UNFINISHED CODE FOR CHANGING DROPDOWN TO CLICKABLE TILES
@@ -221,6 +227,32 @@ class GameContainer extends Component {
       currentCategory: selectedCategory,
       gameStatus: 2
     });
+  }
+
+  sampleQuestion(selectedCategory) {
+    const categoryIndex = this.findCategoryIndex(selectedCategory);
+    const difficultyIndex = this.findDifficultyIndex(categoryIndex);
+    // get length of array prior to removal of sampled question
+    let difficultyArrayLength = null;
+    if (this.state.questions[categoryIndex][difficultyIndex]) {
+      difficultyArrayLength = this.state.questions[categoryIndex][difficultyIndex].length;
+    }
+    // generate random number based on length of current category and difficulty and get length of array prior to removal of sampled question
+    const randomNumber = Math.floor(Math.random() * difficultyArrayLength);
+    // set sampled question using categoryIndex, difficultyIndex and randomNumber
+    const sampledQuestion = this.state.questions[categoryIndex][difficultyIndex][randomNumber];
+    // set current question to be sampled question
+    this.setState({currentQuestion: sampledQuestion});
+    // remove sampled question from questions array
+    const filteredDifficultyArray = this.state.questions[categoryIndex][difficultyIndex].filter(item => item !== sampledQuestion);
+    let filteredQuestionArray = this.state.questions;
+    filteredQuestionArray[categoryIndex][difficultyIndex] = filteredDifficultyArray;
+    this.setState({questions: filteredQuestionArray});
+    // if sampled question was last in difficulty then remove category from playerCategories
+    if (difficultyArrayLength === 1) {
+      let filteredCategoryArray = this.state.playerCategories.filter(item => item !== selectedCategory);
+      this.setState({playerCategories: filteredCategoryArray});
+    }
   }
 
   findCategoryIndex(selectedCategory) {
@@ -261,120 +293,21 @@ class GameContainer extends Component {
     return difficultyIndex;
   }
 
-  sampleQuestion(selectedCategory) {
-    const categoryIndex = this.findCategoryIndex(selectedCategory);
-    const difficultyIndex = this.findDifficultyIndex(categoryIndex);
-    // get length of array prior to removal of sampled question
-    let difficultyArrayLength = null;
-    if (this.state.questions[categoryIndex][difficultyIndex]) {
-      difficultyArrayLength = this.state.questions[categoryIndex][difficultyIndex].length;
-    }
-    // generate random number based on length of current category and difficulty and get length of array prior to removal of sampled question
-    const randomNumber = Math.floor(Math.random() * difficultyArrayLength);
-    // set sampled question using categoryIndex, difficultyIndex and randomNumber
-    const sampledQuestion = this.state.questions[categoryIndex][difficultyIndex][randomNumber];
-    // set current question to be sampled question
-    this.setState({currentQuestion: sampledQuestion});
-    // remove sampled question from questions array
-    const filteredDifficultyArray = this.state.questions[categoryIndex][difficultyIndex].filter(item => item !== sampledQuestion);
-    let filteredQuestionArray = this.state.questions;
-    filteredQuestionArray[categoryIndex][difficultyIndex] = filteredDifficultyArray;
-    this.setState({questions: filteredQuestionArray});
-    // if sampled question was last in difficulty then remove category from playerCategories
-    if (difficultyArrayLength === 1) {
-      let filteredCategoryArray = this.state.playerCategories.filter(item => item !== selectedCategory);
-      this.setState({playerCategories: filteredCategoryArray});
-    }
-  }
 
-  calculateTotalPercentage(currentAnsweredQuestions) {
-    let totalCorrect = 0;
-    let totalAnswered = 0;
-    currentAnsweredQuestions.forEach(function(categoryGroup) {
-      totalCorrect += categoryGroup.correct;
-      totalAnswered += categoryGroup.answered;
-    })
-    let totalPercentage = (totalCorrect/totalAnswered)*100;
-    return totalPercentage;
-  }
-
-  calculateCategoryPercentages(currentAnsweredQuestions) {
-    let newCategoryPercentages = [];
-    let index = 0;
-    currentAnsweredQuestions.forEach(function(categoryGroup) {
-      newCategoryPercentages[index] = (categoryGroup.correct / categoryGroup.answered)*100;
-      index += 1;
-    })
-    return newCategoryPercentages;
-  }
-
-  updateCategoryCounter(currentAnsweredQuestions) {
-    let newCategoryCounter = [];
-    let index = 0;
-    currentAnsweredQuestions.forEach(function(categoryGroup) {
-      newCategoryCounter[index] = categoryGroup.answered;
-      index += 1;
-    })
-    return newCategoryCounter;
-  }
-
-  updateFavouriteCategory(newCategoryCounter) {
-    const currentMaximum = Math.max(...newCategoryCounter);
-    let maxCategoryIndex = null;
-    let index = 0;
-    newCategoryCounter.forEach(function(categoryGroup) {
-      if(categoryGroup === currentMaximum) {
-        maxCategoryIndex = index;
-      }
-      index += 1;
-    });
-    const newFavouriteCategory = this.state.allCategories[maxCategoryIndex].name;
-    return newFavouriteCategory;
-  }
-
-  handleCorrectModalClose() {
-    this.setState({
-      correctModal: "none"
-    })
-  }
-
-  handleCorrectModalOpen() {
-    this.setState({
-      correctModal: "block"
-    })
-    window.setTimeout(this.handleCorrectModalClose, 1000);
-  }
-
-  handleIncorrectModalClose() {
-    this.setState({
-      incorrectModal: "none"
-    })
-  }
-
-  handleIncorrectModalOpen() {
-    this.setState({
-      incorrectModal: "block"
-    })
-    window.setTimeout(this.handleIncorrectModalClose, 1000);
-  }
-
+  // GAME STATE 2 (IN PLAY) FUNCTIONS:
   handleResult(result) {
     let currentResults = this.state.playerResults;
-
     let newAnsweredQuestions = this.state.answeredQuestions;
     const currentCategory = this.state.currentCategory;
     const categoryIndex = this.findCategoryIndex(currentCategory);
-
     newAnsweredQuestions[categoryIndex].answered += 1;
     this.setState({
       answeredQuestions: newAnsweredQuestions
     })
-
     const newCategoryCounter = this.updateCategoryCounter(newAnsweredQuestions)
     currentResults.result.categoryCounter = newCategoryCounter;
     const newFavouriteCategory = this.updateFavouriteCategory(newCategoryCounter);
     currentResults.result.favouriteCategory = newFavouriteCategory;
-
     if(result) {
       this.setState({
         lastResult: "Correct!"
@@ -453,6 +386,51 @@ class GameContainer extends Component {
     }
   }
 
+  updateCategoryCounter(currentAnsweredQuestions) {
+    let newCategoryCounter = [];
+    let index = 0;
+    currentAnsweredQuestions.forEach(function(categoryGroup) {
+      newCategoryCounter[index] = categoryGroup.answered;
+      index += 1;
+    })
+    return newCategoryCounter;
+  }
+
+  updateFavouriteCategory(newCategoryCounter) {
+    const currentMaximum = Math.max(...newCategoryCounter);
+    let maxCategoryIndex = null;
+    let index = 0;
+    newCategoryCounter.forEach(function(categoryGroup) {
+      if(categoryGroup === currentMaximum) {
+        maxCategoryIndex = index;
+      }
+      index += 1;
+    });
+    const newFavouriteCategory = this.state.allCategories[maxCategoryIndex].name;
+    return newFavouriteCategory;
+  }
+
+  calculateTotalPercentage(currentAnsweredQuestions) {
+    let totalCorrect = 0;
+    let totalAnswered = 0;
+    currentAnsweredQuestions.forEach(function(categoryGroup) {
+      totalCorrect += categoryGroup.correct;
+      totalAnswered += categoryGroup.answered;
+    })
+    let totalPercentage = (totalCorrect/totalAnswered)*100;
+    return totalPercentage;
+  }
+
+  calculateCategoryPercentages(currentAnsweredQuestions) {
+    let newCategoryPercentages = [];
+    let index = 0;
+    currentAnsweredQuestions.forEach(function(categoryGroup) {
+      newCategoryPercentages[index] = (categoryGroup.correct / categoryGroup.answered)*100;
+      index += 1;
+    })
+    return newCategoryPercentages;
+  }
+
   removeCategory(){
     this.state.playerCategories.forEach(function(category) {
       if (category === this.state.currentCategory) {
@@ -460,6 +438,30 @@ class GameContainer extends Component {
         this.setState({playerCategories: filteredCategoryArray});
       }
     }.bind(this));
+  }
+
+  checkIncrementDiffculty() {
+    if((this.state.currentCell + 1) === 5) {
+      this.setState({
+        currentDifficulty: "medium",
+        currentDifficultyValue: 2,
+        playerCategories: this.state.allCategories,
+      });
+    }
+    else if ((this.state.currentCell + 1) === 10) {
+      this.setState({
+        currentDifficulty: "hard",
+        currentDifficultyValue: 3,
+        playerCategories: this.state.allCategories,
+      });
+    }
+    else if ((this.state.currentCell + 1) === 15) {
+      const remainingHardCategories = this.removeExhaustedHardCategories()
+      this.setState({
+        currentDifficultyValue: 4,
+        playerCategories: remainingHardCategories,
+      });
+    }
   }
 
   removeExhaustedHardCategories(){
@@ -499,34 +501,38 @@ class GameContainer extends Component {
     return remainingHardCategories;
   }
 
-  checkIncrementDiffculty() {
-    if((this.state.currentCell + 1) === 5) {
-      this.setState({
-        currentDifficulty: "medium",
-        currentDifficultyValue: 2,
-        playerCategories: this.state.allCategories,
-      });
-    }
-    else if ((this.state.currentCell + 1) === 10) {
-      this.setState({
-        currentDifficulty: "hard",
-        currentDifficultyValue: 3,
-        playerCategories: this.state.allCategories,
-      });
-    }
-    else if ((this.state.currentCell + 1) === 15) {
-      const remainingHardCategories = this.removeExhaustedHardCategories()
-      this.setState({
-        currentDifficultyValue: 4,
-        playerCategories: remainingHardCategories,
-      });
-    }
+  handleCorrectModalOpen() {
+    this.setState({
+      correctModal: "block"
+    })
+    window.setTimeout(this.handleCorrectModalClose, 1000);
   }
 
-  // On clicking an icon in the End.js component:
-  // Post the playerResults object to the Mongo database
-  // So that it is available for generating stats/charts/leader-board
+  handleCorrectModalClose() {
+    this.setState({
+      correctModal: "none"
+    })
+  }
+
+  handleIncorrectModalOpen() {
+    this.setState({
+      incorrectModal: "block"
+    })
+    window.setTimeout(this.handleIncorrectModalClose, 1000);
+  }
+
+  handleIncorrectModalClose() {
+    this.setState({
+      incorrectModal: "none"
+    })
+  }
+
+
+  // GAME STATE 3 (END) FUNCTIONS:
   handleEndClick() {
+    // On clicking an icon in the End.js component:
+    // Post the playerResults object to the Mongo database
+    // So that it is available for generating stats/charts/leader-board
     requestPlayers.post(createRequestComplete, this.state.playerResults);
     window.location.reload()
     // this.setState({
@@ -534,46 +540,57 @@ class GameContainer extends Component {
     // });
   }
 
+
+  // DEV FUNCTIONS:
   handleEndGame() {
     this.setState({
       gameStatus: 3
     });
   }
 
+
   render(){
     return (
       <div className="game-container">
         <CellContainer
+          gameStatus={this.state.gameStatus}
           currentCell={this.state.currentCell}
           cellImages={this.state.cellImages}
-          gameStatus={this.state.gameStatus}
         />
         <MiddleContainer
           gameStatus={this.state.gameStatus}
+          // START PROPS & FUNCTIONS
           playerName={this.state.playerName}
-          playerCategories={this.state.playerCategories}
-          playerResults={this.state.playerResults}
-          currentCell={this.state.currentCell}
-          currentQuestion={this.state.currentQuestion}
-          currentDifficultyValue={this.state.currentDifficultyValue}
-          handleEndClick={this.handleEndClick}
           handlePlayerNameKeyUp={this.handlePlayerNameKeyUp}
           handlePlayerNameSubmit={this.handlePlayerNameSubmit}
+          // CATEGORY PROPS & FUNCTIONS
+          playerCategories={this.state.playerCategories}
+          currentDifficultyValue={this.state.currentDifficultyValue}
           handleCategorySelect={this.handleCategorySelect}
           handleCategoryRandomise={this.handleCategoryRandomise}
+          // QUIZ PROPS & FUNCTIONS
+          currentQuestion={this.state.currentQuestion}
           handleResult={this.handleResult}
+          // END PROPS & FUNCTIONS
+          playerResults={this.state.playerResults}
+          currentCell={this.state.currentCell}
+          handleEndClick={this.handleEndClick}
         />
+        {/* MODAL DISPLAY */}
         <div style={{display: this.state.correctModal}} id="myCorrectModal" className="correct-modal">
           <div className="correct-modal-content">
-            {this.state.lastResult}
+            <p className="modal">{this.state.lastResult}</p>
+            <p className="modal">Total Points: {this.state.playerResults.result.points}</p>
           </div>
         </div>
         <div style={{display: this.state.incorrectModal}} id="myIncorrectModal" className="incorrect-modal">
           <div className="incorrect-modal-content">
-            {this.state.lastResult}
+            <p className="modal">{this.state.lastResult}</p>
+            <p className="modal">Total Points: {this.state.playerResults.result.points}</p>
           </div>
         </div>
-        {/* <button onClick={this.handleEndGame}>End</button> */}
+        {/* DEV MOVE TO END GAME BUTTON
+        <button onClick={this.handleEndGame}>End</button> */}
       </div>
     )
   }
